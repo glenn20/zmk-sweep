@@ -74,7 +74,7 @@
             &kp Z &kp X &kp C &kp V &kp B           &kp N &kp M  &kp COMMA &kp DOT &kp ENTER
                   &mo EXT &mt LSHIFT SPACE          &kp SPACE &sl SYM
             >;
-        };,,
+        };
 
         // Numbers and high frequency symbols
         sym_layer {
