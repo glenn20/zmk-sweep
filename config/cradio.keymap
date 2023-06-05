@@ -36,6 +36,7 @@
             key-positions = <0 1>;
             bindings = <&kp ESC>;
         };
+        // outer left and outer right thumb keys
         combo_sym {
             timeout-ms = <50>;
             key-positions = <30 33>;
@@ -45,19 +46,19 @@
         combo_fun {
             timeout-ms = <300>;
             key-positions = <32 33>;
-            bindings = <&to FUN>;
+            bindings = <&to NAV>;
         };
-        // internal-left & external-right thumb keys
+        // inner-left & outer-right thumb keys
         combo_nav {
             timeout-ms = <200>;
             key-positions = <31 33>;
-            bindings = <&to NAV>;
+            bindings = <&to FUN>;
         };
         // both left thumb keys
         combo_settings {
             timeout-ms = <300>;
             key-positions = <30 31>;
-            bindings = <&to SETTINGS>;
+            bindings = <&mo SETTINGS>;
         };
     };
 
@@ -82,7 +83,7 @@
             &kp Q      &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O       &kp P
             &hm LGUI A &hm LALT S &kp D      &kp F      &kp G          &kp H      &hm RGUI J &hm RALT K &kp L       &kp BSPC
             &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT     &kp ENTER
-                                             &to NAV    &mt LSHIFT TAB &mt LCTRL SPACE &sl SYM
+                                             &mo NAV    &mt LSHIFT TAB &mt LCTRL SPACE &sl SYM
             >;
         };
 
@@ -92,7 +93,7 @@
             &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT      &kp CARET  &kp AMPS   &kp ASTRK  &kp GRAVE   &kp TILDE
             &kp ESC    &kp DQT    &kp LBKT   &kp LBRC   &kp LPAR       &kp FSLH   &kp MINUS  &kp EQUAL  &kp COLON   &kp SEMI
             &kp TAB    &kp SQT    &kp RBKT   &kp RBRC   &kp RPAR       &kp BSLH   &kp UNDER  &kp PLUS   &kp PIPE    &kp QMARK
-                                             &to BASE   &trans         &trans     &to NAV
+                                             &to BASE   &trans         &mt LCTRL N1 &sl NAV
             >;
         };
 
@@ -100,9 +101,9 @@
         nav_layer {
             bindings = <
             &kp N1     &kp N2     &kp N3     &kp N4     &kp N5         &kp N6     &kp N7     &kp N8     &kp N9      &kp N0
-            &sk LGUI   &sk LALT   &kp ENTER  &kp BSPC   &kp LC(BSPC)   &kp PG_UP  &kp HOME   &kp UP     &kp END     &kp CAPS
-            &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &kp LC(Y)      &kp PG_DN  &kp LEFT   &kp DOWN   &kp RIGHT   &kp DEL
-                                             &to BASE   &trans         &trans     &to FUN
+            &sk LGUI   &sk LALT   &kp ENTER  &kp CAPS   &kp LC(BSPC)   &kp PG_UP  &kp LEFT   &kp UP     &kp RIGHT   &kp BSPC
+            &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &kp LC(Y)      &kp PG_DN  &kp HOME   &kp DOWN   &kp END     &kp DEL
+                                             &to BASE   &trans         &mt LCTRL N2 &sl FUN
             >;
         };
 
@@ -112,7 +113,7 @@
             &kp F1     &kp F2     &kp F3     &kp F4     &kp F5         &kp F6     &kp F7     &kp F8     &kp F9      &kp F10
             &sk LGUI   &sk LALT   &none      &none      &none          &none      &none      &none      &kp F11     &kp F12
             &none      &none      &none      &none      &none          &none      &none      &none      &none       &kp PRINTSCREEN
-                                             &to BASE   &trans         &trans     &to SETTINGS
+                                             &to BASE   &trans         &mt LCTRL N3 &sl SETTINGS
             >;
         };
 
@@ -122,7 +123,7 @@
             &bootloader &none &none &bt BT_CLR &bt BT_SEL 0            &bt BT_SEL 3 &none &unstick &none &bootloader
             &none       &none &none &none      &bt BT_SEL 1            &bt BT_SEL 4 &none &none    &none &none
             &sys_reset  &none &none &none      &bt BT_SEL 2            &bt BT_SEL 5 &none &none    &none &sys_reset
-                                             &to BASE &none            &none &to BASE
+                                             &to BASE &none            &mt LCTRL N4  &none
             >;
         };
     };
