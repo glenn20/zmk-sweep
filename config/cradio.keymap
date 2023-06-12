@@ -7,7 +7,6 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/mouse.h>
 
 // Layer definitions
 #define BASE 0
@@ -16,6 +15,9 @@
 #define FUN 3
 #define SETTINGS 4
 // -----------------
+
+#define HL(k1,k2,k3) &hm LCTRL k1 &hm LGUI k2  &hm LALT  k3
+#define HR(k1,k2,k3) &hm RALT  k1 &hm RGUI k2  &hm RCTRL k3
 
 / {
     macros {
@@ -73,6 +75,11 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
+        // hc: homerow_c {
+        //     compatible = "zmk,behavior-homerow_mods";
+        //     label = "HOMEROW_CTRL";
+        //     bindings = <&kp LCTRL>, <&kp>;
+        // };
     };
 
     keymap {
@@ -81,10 +88,10 @@
         // Base alpha layer
         default_layer {
             bindings = <
-            &kp Q      &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O       &kp P
-            &hm LGUI A &hm LALT S &kp D      &kp F      &kp G          &kp H      &hm RGUI J &hm RALT K &kp L       &kp BSPC
-            &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT     &kp ENTER
-                                             &sl NAV    &mt LCTRL TAB &mt LSHIFT SPACE &sl SYM
+            &kp Q       &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O       &kp P
+            &kp A       HL( S,         D,         F)     &kp G          &kp H      HR( J,         K,         L)      &kp BSPC
+            &kp Z       &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT     &kp ENTER
+                                             &sl NAV  &mt LCTRL TAB    &mt LSHFT SPACE &sl SYM
             >;
         };
 
@@ -92,9 +99,9 @@
         sym_layer {
             bindings = <
             &kp EXCL       &kp AT      &kp HASH   &kp DLLR   &kp PRCNT      &kp CARET  &kp AMPS   &kp ASTRK  &kp PIPE    &kp QMARK
-            &hm LGUI GRAVE &hm LALT LT &kp LBKT   &kp LBRC   &kp LPAR       &kp FSLH   &kp MINUS  &kp EQUAL  &kp SEMI    &kp DQT
+            &gresc         HL( LT,         LBKT,      LBRC)  &kp LPAR       &kp FSLH   HR( MINUS,     EQUAL,     SEMI)   &kp DQT
             &kp TILDE      &kp GT      &kp RBKT   &kp RBRC   &kp RPAR       &kp BSLH   &kp UNDER  &kp PLUS   &kp COLON   &kp SQT
-                                                &to BASE   &trans         &mt LCTRL N1 &sl NAV
+                                                &to BASE   &trans         &mt LSHFT N1 &sl NAV
             >;
         };
 
@@ -102,19 +109,19 @@
         nav_layer {
             bindings = <
             &kp N1     &kp N2     &kp N3     &kp N4     &kp N5         &kp N6     &kp N7     &kp N8     &kp N9      &kp N0
-            &sk LGUI   &sk LALT   &kp ENTER  &kp CAPS   &kp LC(BSPC)   &kp PG_UP  &kp LEFT   &kp UP     &kp RIGHT   &kp BSPC
-            &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &kp LC(Y)      &kp PG_DN  &kp HOME   &kp DOWN   &kp END     &kp DEL
-                                             &to BASE   &trans         &mt LCTRL N2 &sl FUN
+            &kp FSLH   HL( ASTRK,     MINUS,     PLUS)  &kp ENTER      &kp PG_UP  &kp LEFT   &kp UP     &kp RIGHT   &kp BSPC
+            &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &kp DOT        &kp PG_DN  &kp HOME   &kp DOWN   &kp END     &kp DEL
+                                             &to BASE   &trans         &mt LSHFT N2 &sl FUN
             >;
         };
 
         // Function keys with modifiers
         fun_layer {
             bindings = <
-            &kp F1     &kp F2     &kp F3     &kp F4       &kp F5         &kp F6           &kp F7           &kp F8         &kp F9            &kp F10
-            &sk LGUI   &sk LALT   &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP   &mwh SCROLL_UP   &mmv MOVE_LEFT   &mmv MOVE_UP   &mmv MOVE_RIGHT   &kp F11
-            &kp PSCRN  &none      &none      &none        &none          &mwh SCROLL_DOWN &mwh SCROLL_LEFT &mmv MOVE_DOWN &mmv SCROLL_RIGHT &kp F12
-                                             &to BASE     &trans         &mt LCTRL N3 &sl SETTINGS
+            &kp F1     &kp F2     &kp F3     &kp F4       &kp F5         &kp F6       &kp F7       &kp F8        &kp F9        &kp F10
+            &kp LSHFT  HL( C_MUTE, C_VOL_DN, C_VOL_UP)    &none          &kp LG(FSLH) &kp LG(LEFT) &kp LG(UP)    &kp LG(RIGHT) &kp F11
+            &kp PSCRN  &none      &none      &none        &none          &none        &kp LG(O)    &kp LG(DOWN)  &kp LG(ENTER) &kp F12
+                                             &to BASE     &trans         &mt LSHFT N3 &sl SETTINGS
             >;
         };
 
