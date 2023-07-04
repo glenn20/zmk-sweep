@@ -11,13 +11,13 @@
 // Layer definitions
 #define BASE 0
 #define SYM 1
-#define NAV 2
+#define NUM 2
 #define FUN 3
 #define SETTINGS 4
 // -----------------
 
-#define HL(k1,k2,k3) &hm LCTRL k1 &hm LGUI k2  &hm LALT  k3
-#define HR(k1,k2,k3) &hm RALT  k1 &hm RGUI k2  &hm RCTRL k3
+#define HL(k1,k2,k3) &hm LCTRL k1 &hm LALT k2  &hm LGUI  k3
+#define HR(k1,k2,k3) &hm RGUI  k1 &hm RALT k2  &hm RCTRL k3
 
 / {
     macros {
@@ -39,27 +39,27 @@
             key-positions = <0 1>;
             bindings = <&kp ESC>;
         };
-        // outer left and outer right thumb keys - hold SYM layer
+        // outer left and inner right thumb keys - hold NUM layer
+        combo_num {
+            timeout-ms = <200>;
+            key-positions = <30 32>;
+            bindings = <&to NUM>;
+        };
+        // inner-left & outer-right thumb keys - hold SYM layer
         combo_sym {
-            timeout-ms = <50>;
-            key-positions = <30 33>;
-            bindings = <&to SYM>;
-        };
-        // both right thumb keys
-        combo_fun {
-            timeout-ms = <300>;
-            key-positions = <32 33>;
-            bindings = <&to NAV>;
-        };
-        // inner-left & outer-right thumb keys
-        combo_nav {
             timeout-ms = <200>;
             key-positions = <31 33>;
+            bindings = <&to SYM>;
+        };
+        // outer left and outer right thumb keys - hold FUN layer
+        combo_fun {
+            timeout-ms = <200>;
+            key-positions = <30 33>;
             bindings = <&to FUN>;
         };
         // both left thumb keys
         combo_settings {
-            timeout-ms = <300>;
+            timeout-ms = <200>;
             key-positions = <30 31>;
             bindings = <&mo SETTINGS>;
         };
@@ -88,50 +88,50 @@
         // Base alpha layer
         default_layer {
             bindings = <
-            &kp Q       &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O       &kp P
-            &kp A       HL( S,         D,         F)     &kp G          &kp H      HR( J,         K,         L)      &kp BSPC
-            &kp Z       &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT     &kp ENTER
-                                             &sl NAV  &mt LCTRL TAB    &mt LSHFT SPACE &sl SYM
+            &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
+            &kp A       HL( S,          D,          F)      &kp G           &kp H       HR( J,          K,          L)      &kp BSPC
+            &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ENTER
+                                                &sl NUM &mt LSHFT TAB       &mt LCTRL SPACE &sl SYM
             >;
         };
 
         // Symbols
         sym_layer {
             bindings = <
-            &kp EXCL       &kp AT      &kp HASH   &kp DLLR   &kp PRCNT      &kp CARET  &kp AMPS   &kp ASTRK  &kp PIPE    &kp QMARK
-            &gresc         HL( LT,         LBKT,      LBRC)  &kp LPAR       &kp FSLH   HR( MINUS,     EQUAL,     SEMI)   &kp DQT
-            &kp TILDE      &kp GT      &kp RBKT   &kp RBRC   &kp RPAR       &kp BSLH   &kp UNDER  &kp PLUS   &kp COLON   &kp SQT
-                                                &to BASE   &trans         &mt LSHFT N1 &sl NAV
+            &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT       &kp CARET   &kp AMPS    &kp ASTRK   &kp PIPE    &kp QMARK
+            &kp GRAVE   HL( LT,         LBKT,       LBRC)   &kp LPAR        &kp FSLH    HR( MINUS,      EQUAL,      SEMI)   &kp DQT
+            &kp TILDE   &kp GT      &kp RBKT    &kp RBRC    &kp RPAR        &kp BSLH    &kp UNDER   &kp PLUS    &kp COLON   &kp SQT
+                                                &to BASE &mt LSHFT ESC      &mt LCTRL N1 &sl NUM
             >;
         };
 
         // Navigation
-        nav_layer {
+        num_layer {
             bindings = <
-            &kp N1     &kp N2     &kp N3     &kp N4     &kp N5         &kp N6     &kp N7     &kp N8     &kp N9      &kp N0
-            &kp FSLH   HL( ASTRK,     MINUS,     PLUS)  &kp ENTER      &kp PG_UP  &kp LEFT   &kp UP     &kp RIGHT   &kp BSPC
-            &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &kp DOT        &kp PG_DN  &kp HOME   &kp DOWN   &kp END     &kp DEL
-                                             &to BASE   &trans         &mt LSHFT N2 &sl FUN
+            &kp N1      &kp N2      &kp N3      &kp N4      &kp N5          &kp N6      &kp N7      &kp N8      &kp N9      &kp N0
+            &kp FSLH    HL( ASTRK,      MINUS,      PLUS)   &kp ENTER       &kp PG_UP   &kp LEFT    &kp UP      &kp RIGHT   &kp BSPC
+            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp DOT         &kp PG_DN   &kp HOME    &kp DOWN    &kp END     &kp DEL
+                                                &to BASE    &trans          &mt LCTRL N2 &sl FUN
             >;
         };
 
         // Function keys with modifiers
         fun_layer {
             bindings = <
-            &kp F1     &kp F2     &kp F3     &kp F4       &kp F5         &kp F6       &kp F7       &kp F8        &kp F9        &kp F10
-            &kp LSHFT  HL( C_MUTE, C_VOL_DN, C_VOL_UP)    &none          &kp LG(FSLH) &kp LG(LEFT) &kp LG(UP)    &kp LG(RIGHT) &kp F11
-            &kp PSCRN  &none      &none      &none        &none          &none        &kp LG(O)    &kp LG(DOWN)  &kp LG(ENTER) &kp F12
-                                             &to BASE     &trans         &mt LSHFT N3 &sl SETTINGS
+            &kp F1      &kp F2      &kp F3      &kp F4      &kp F5          &kp F6      &kp F7      &kp F8      &kp F9      &kp F10
+            &kp LSHFT   HL( C_MUTE, C_VOL_DN,   C_VOL_UP)   &none           &kp LG(FSLH) &kp LG(LEFT) &kp LG(UP) &kp LG(RIGHT) &kp F11
+            &kp PSCRN   &kp C_PWR   &kp C_SLEEP &none       &none           &none       &kp LG(O)   &kp LG(DOWN) &kp LG(ENTER) &kp F12
+                                                &to BASE    &trans          &mt LCTRL N3 &sl BASE
             >;
         };
 
         // Used to change the keyboard's settings.
         settings_layer {
             bindings = <
-            &bootloader &none &none &bt BT_CLR &bt BT_SEL 0            &bt BT_SEL 3 &none &unstick &none &bootloader
-            &none       &none &none &none      &bt BT_SEL 1            &bt BT_SEL 4 &none &none    &none &none
-            &sys_reset  &none &none &none      &bt BT_SEL 2            &bt BT_SEL 5 &none &none    &none &sys_reset
-                                             &to BASE &none            &mt LCTRL N4  &none
+            &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &none     &none      &none   &none       &none
+            &none        &none        &none        &none        &none           &none     &none      &none   &none       &none
+            &sys_reset   &bootloader  &bt BT_CLR   &unstick     &none           &none     &none      &none   &bootloader &sys_reset
+                                                   &to BASE     &none           &mt LCTRL N4 &none
             >;
         };
     };
