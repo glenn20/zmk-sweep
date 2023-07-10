@@ -11,13 +11,15 @@
 // Layer definitions
 #define BASE 0
 #define SYM 1
-#define NUM 2
+#define NAV 2
 #define FUN 3
 #define SETTINGS 4
 // -----------------
 
-#define HL(k1,k2,k3) &hm LCTRL k1 &hm LALT k2  &hm LGUI  k3
-#define HR(k1,k2,k3) &hm RGUI  k1 &hm RALT k2  &hm RCTRL k3
+#define HL(k1,k2,k3,k4) &hm LGUI  k1 &hm LALT  k2 &hm LCTRL k3 &hm LSHFT k4
+#define HR(k1,k2,k3,k4) &hm RSHFT k1 &hm RCTRL k2 &hm RALT  k3 &hm RGUI  k4
+#define HL3(k1,k2,k3)   &hm LGUI  k1 &hm LALT  k2 &hm LCTRL k3
+#define HR3(k1,k2,k3)   &hm RCTRL k1 &hm RALT  k2 &hm RGUI  k3
 
 / {
     macros {
@@ -39,28 +41,22 @@
             key-positions = <0 1>;
             bindings = <&kp ESC>;
         };
-        // outer left and inner right thumb keys - hold NUM layer
-        combo_num {
-            timeout-ms = <200>;
-            key-positions = <30 32>;
-            bindings = <&to NUM>;
-        };
-        // inner-left & outer-right thumb keys - hold SYM layer
-        combo_sym {
-            timeout-ms = <200>;
-            key-positions = <31 33>;
-            bindings = <&to SYM>;
-        };
-        // outer left and outer right thumb keys - hold FUN layer
-        combo_fun {
+        // Press all the left home keys to unstick modifiers.
+        // combo_unstick {
+        //     timeout-ms = <100>;
+        //     key-positions = <10 11 12 13>;
+        //     bindings = <&unstick>;
+        // };
+        // outer left and outer right thumb keys - hold NAV layer
+        combo_nav {
             timeout-ms = <200>;
             key-positions = <30 33>;
-            bindings = <&to FUN>;
+            bindings = <&to NAV>;
         };
-        // both left thumb keys
+        // B, V and left inner thumb key
         combo_settings {
-            timeout-ms = <200>;
-            key-positions = <30 31>;
+            timeout-ms = <500>;
+            key-positions = <23 24 31>;
             bindings = <&mo SETTINGS>;
         };
     };
@@ -75,11 +71,6 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
-        // hc: homerow_c {
-        //     compatible = "zmk,behavior-homerow_mods";
-        //     label = "HOMEROW_CTRL";
-        //     bindings = <&kp LCTRL>, <&kp>;
-        // };
     };
 
     keymap {
@@ -89,9 +80,9 @@
         default_layer {
             bindings = <
             &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
-            &kp A       HL( S,          D,          F)      &kp G           &kp H       HR( J,          K,          L)      &kp BSPC
+            HL( A,          S,          D,          F)      &kp G           &kp H       HR3(J,          K,          L)      &kp BSPC
             &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ENTER
-                                                &sl NUM &mt LSHFT TAB       &mt LCTRL SPACE &sl SYM
+                                                &sl NAV &mt LSHFT TAB       &mt LCTRL SPACE &sl SYM
             >;
         };
 
@@ -99,18 +90,18 @@
         sym_layer {
             bindings = <
             &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT       &kp CARET   &kp AMPS    &kp ASTRK   &kp PIPE    &kp QMARK
-            &kp GRAVE   HL( LT,         LBKT,       LBRC)   &kp LPAR        &kp FSLH    HR( MINUS,      EQUAL,      SEMI)   &kp DQT
-            &kp TILDE   &kp GT      &kp RBKT    &kp RBRC    &kp RPAR        &kp BSLH    &kp UNDER   &kp PLUS    &kp COLON   &kp SQT
-                                                &to BASE &mt LSHFT ESC      &mt LCTRL N1 &sl NUM
+            HL( GRAVE,      LT,         LBKT,       LPAR)   &kp LBRC        &kp FSLH    HR( MINUS,      EQUAL,      SEMI,       DQT)
+            &kp TILDE   &kp GT      &kp RBKT    &kp RPAR    &kp RBRC        &kp BSLH    &kp UNDER   &kp PLUS    &kp COLON   &kp SQT
+                                                &to BASE &mt LSHFT ESC      &mt LCTRL N1 &sl FUN
             >;
         };
 
         // Navigation
-        num_layer {
+        nav_layer {
             bindings = <
             &kp N1      &kp N2      &kp N3      &kp N4      &kp N5          &kp N6      &kp N7      &kp N8      &kp N9      &kp N0
-            &kp FSLH    HL( ASTRK,      MINUS,      PLUS)   &kp ENTER       &kp PG_UP   &kp LEFT    &kp UP      &kp RIGHT   &kp BSPC
-            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp DOT         &kp PG_DN   &kp HOME    &kp DOWN    &kp END     &kp DEL
+            HL( FSLH,       ASTRK,      MINUS,      PLUS)   &kp DOT         &kp PG_UP   &kp LEFT    &kp UP      &kp RIGHT   &kp BSPC
+            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp DEL         &kp PG_DN   &kp HOME    &kp DOWN    &kp END     &kp ENTER
                                                 &to BASE    &trans          &mt LCTRL N2 &sl FUN
             >;
         };
@@ -119,9 +110,9 @@
         fun_layer {
             bindings = <
             &kp F1      &kp F2      &kp F3      &kp F4      &kp F5          &kp F6      &kp F7      &kp F8      &kp F9      &kp F10
-            &kp LSHFT   HL( C_MUTE, C_VOL_DN,   C_VOL_UP)   &none           &kp LG(FSLH) &kp LG(LEFT) &kp LG(UP) &kp LG(RIGHT) &kp F11
-            &kp PSCRN   &kp C_PWR   &kp C_SLEEP &none       &none           &none       &kp LG(O)   &kp LG(DOWN) &kp LG(ENTER) &kp F12
-                                                &to BASE    &trans          &mt LCTRL N3 &sl BASE
+            &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &kp C_SLEEP     &kp LG(FSLH) &kp LG(LEFT) &kp LG(UP) &kp LG(RIGHT) &kp F11
+            &kp PSCRN   &kp C_MUTE  &kp C_VOL_DN &kp C_VOL_UP &kp C_PWR     &none       &kp LG(O)   &kp LG(DOWN) &kp LG(ENTER) &kp F12
+                                                &to BASE    &trans          &mt LCTRL N3 &none
             >;
         };
 
@@ -131,7 +122,7 @@
             &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &none     &none      &none   &none       &none
             &none        &none        &none        &none        &none           &none     &none      &none   &none       &none
             &sys_reset   &bootloader  &bt BT_CLR   &unstick     &none           &none     &none      &none   &bootloader &sys_reset
-                                                   &to BASE     &none           &mt LCTRL N4 &none
+                                                   &to BASE     &none           &none     &none
             >;
         };
     };
