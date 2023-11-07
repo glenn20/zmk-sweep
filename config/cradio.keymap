@@ -67,7 +67,7 @@
             &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
             HL( A,          S,          D,          F)      &kp G           &kp H        HR(J,          K,          L,          SEMI)
             &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC
-                                        &lt SYM TAB &lt NAV SPACE           &lt NUM ENTER  &lt FUN BSPC
+                                        &lt SYM TAB &lt NAV ENTER           &lt NUM SPACE  &lt FUN BSPC
             >;
         };
 
@@ -77,7 +77,7 @@
             &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT       &kp CARET   &kp AMPS    &kp ASTRK   &kp PIPE    &kp QMARK
             HL( GRAVE,      LPAR,       RPAR,       LBKT)   &kp RBKT        &kp FSLH    HR( MINUS,      EQUAL,      SEMI,       DQT)
             &kp TILDE   &kp LT      &kp GT      &kp LBRC    &kp RBRC        &kp BSLH    &kp UNDER   &kp PLUS    &kp COLON   &kp SQT
-                                                &kp TAB     &kp SPACE       &kp ENTER   &kp BSPC
+                                                &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
 
@@ -87,7 +87,7 @@
             &kp HOME    &kp PG_UP   &kp PG_DN   &kp END     &kp BSPC        &kp ESC     &kp LC(LEFT) &kp UP     &kp DOWN    &kp LC(RIGHT)
             &kp LEFT    &kp UP      &kp DOWN    &kp RIGHT   &kp DEL         &kp DEL     &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
             &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &caps_word  &none       &none       &tog NAV    &to BASE
-                                                &kp TAB     &kp SPACE       &kp ENTER   &kp BSPC
+                                                &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
 
@@ -97,7 +97,7 @@
             &kp FSLH    &kp N7      &kp N8      &kp N9      &kp MINUS       &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)
             &kp ASTRK   &kp N4      &kp N5      &kp N6      &kp PLUS        &kp UNDER   &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
             &kp N0      &kp N1      &kp N2      &kp N3      &kp DOT         &kp COMMA   &kp DEL     &none       &tog NUM    &to BASE
-                                                &kp TAB     &kp SPACE       &kp ENTER   &kp BSPC
+                                                &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
 
@@ -107,17 +107,17 @@
             &kp F12     &kp F7      &kp F8      &kp F9      &kp PSCRN       &kp C_MUTE  &kp C_VOL_DN &kp C_VOL_UP &kp C_SLEEP &kp C_PWR
             &kp F11     &kp F4      &kp F5      &kp F6      &none           &none       &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
             &kp F10     &kp F1      &kp F2      &kp F3      &none           &none       &none       &none       &tog FUN    &to BASE
-                                                &kp TAB     &kp SPACE       &kp ENTER   &kp BSPC
+                                                &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
 
         // Used to change the keyboard's settings.
         settings_layer {
             bindings = <
-            &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &kp C     &kp LS(LC(LA(LEFT))) &kp LS(LC(LA(DOWN))) &kp LS(LC(LA(UP))) &kp LS(LC(LA(RIGHT)))
+            &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &none     &kp LS(LC(LA(LEFT))) &kp LS(LC(LA(DOWN))) &kp LS(LC(LA(UP))) &kp LS(LC(LA(RIGHT)))
             &none        &none        &none        &none        &out OUT_USB    &none     &kp LC(LA(LEFT)) &kp LC(LA(DOWN)) &kp LC(LA(UP)) &kp LC(LA(RIGHT))
             &sys_reset   &bootloader  &bt BT_CLR   &unstick     &out OUT_BLE    &none     &none      &none   &bootloader &sys_reset
-                                                   &none        &none           &none     &none
+                                                   &none        &none           &kp 9     &none
             >;
         };
     };
