@@ -117,7 +117,7 @@
             &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &sys_reset  &kp LS(LC(LA(LEFT))) &kp LS(LC(LA(DOWN))) &kp LS(LC(LA(UP))) &kp LS(LC(LA(RIGHT)))
             &kp C_SLEEP  &kp C_PWR    &none        &none        &out OUT_USB    &bootloader &kp LC(LA(LEFT)) &kp LC(LA(DOWN)) &kp LC(LA(UP)) &kp LC(LA(RIGHT))
             &sys_reset   &bootloader  &bt BT_CLR   &unstick     &out OUT_BLE    &none       &kp LG(LEFT) &kp LG(DOWN) &kp LG(UP) &kp LG(RIGHT)
-                                                   &none        &none           &kp 9     &none
+                                                   &none        &none           &kp N9      &none
             >;
         };
     };
