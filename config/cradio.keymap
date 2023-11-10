@@ -20,8 +20,6 @@
 
 #define HL(k1,k2,k3,k4) &mt LGUI  k1 &mt LALT  k2 &mt LCTRL k3 &mt LSHFT k4
 #define HR(k1,k2,k3,k4) &mt RSHFT k1 &mt RCTRL k2 &mt RALT  k3 &mt RGUI  k4
-#define HL3(k1,k2,k3)   &mt LGUI  k1 &mt LALT  k2 &mt LCTRL k3
-#define HR3(k1,k2,k3)   &mt RCTRL k1 &mt RALT  k2 &mt RGUI  k3
 
 / {
     macros {
@@ -95,8 +93,8 @@
         num_layer {
             bindings = <
             &kp FSLH    &kp N7      &kp N8      &kp N9      &kp MINUS       &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)
-            &kp ASTRK   &kp N4      &kp N5      &kp N6      &kp PLUS        &kp UNDER   &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
-            &kp N0      &kp N1      &kp N2      &kp N3      &kp DOT         &kp COMMA   &kp DEL     &kp SPACE   &none       &kp ESC
+            &kp N0      &kp N4      &kp N5      &kp N6      &kp PLUS        &kp UNDER   &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
+            &kp ASTRK   &kp N1      &kp N2      &kp N3      &kp DOT         &kp COMMA   &kp DEL     &kp SPACE   &none       &kp ESC
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
