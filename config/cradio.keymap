@@ -63,7 +63,7 @@
         default_layer {
             bindings = <
             &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
-            HL( A,          S,          D,          F)      &kp G           &kp H        HR(J,          K,          L,          ENTER)
+            HL( A,          S,          D,          F)      &kp G           &kp H        HR(J,          K,          L,          BSPC)
             &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC
                                         &lt FUN TAB &lt NAV ENTER           &lt SYM SPACE  &lt NUM BSPC
             >;
@@ -82,9 +82,9 @@
         // Navigation
         nav_layer {
             bindings = <
-            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)
+            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp LC(D)   &caps_word  &none       &none       &none
             &kp HOME    &kp LEFT    &kp UP      &kp RIGHT   &kp PG_UP       &kp LC(BSPC)&kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
-            &kp END     &kp LC(LEFT)&kp DOWN    &kp LC(RIGHT)&kp PG_DN      &kp LC(DEL) &kp DEL     &kp ENTER   &caps_word  &kp ESC
+            &kp END     &kp LC(LEFT)&kp DOWN    &kp LC(RIGHT)&kp PG_DN      &kp LC(DEL) &kp DEL     &kp ENTER   &none       &kp ESC
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
