@@ -63,7 +63,7 @@
         default_layer {
             bindings = <
             &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
-            HL( A,          S,          D,          F)      &kp G           &kp H        HR(J,          K,          L,          BSPC)
+            HL( A,          S,          D,          F)      &kp G           &kp H        HR(J,          K,          L,          SEMI)
             &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC
                                         &lt FUN TAB &lt NAV ENTER           &lt SYM SPACE  &lt NUM BSPC
             >;
@@ -73,8 +73,8 @@
         sym_layer {
             bindings = <
             &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT       &kp CARET   &kp AMPS    &kp ASTRK   &kp PIPE    &kp QMARK
-            HL( GRAVE,      LT,         LBKT,       LPAR)   &kp LBRC        &kp FSLH    HR( MINUS,      EQUAL,      SEMI,       DQT)
-            &kp TILDE   &kp GT      &kp RBKT    &kp RPAR    &kp RBRC        &kp BSLH    &kp UNDER   &kp PLUS    &kp COLON   &kp SQT
+            HL( GRAVE,      LT,         LBKT,       LPAR)   &kp LBRC        &kp FSLH    HR( MINUS,      EQUAL,      DQT,        SEMI)
+            &kp TILDE   &kp GT      &kp RBKT    &kp RPAR    &kp RBRC        &kp BSLH    &kp UNDER   &kp PLUS    &kp SQT     &kp COLON
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
@@ -84,7 +84,7 @@
             bindings = <
             &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp LC(D)   &caps_word  &none       &none       &none
             &kp HOME    &kp LEFT    &kp UP      &kp RIGHT   &kp PG_UP       &kp LC(BSPC)&kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
-            &kp END     &kp LC(LEFT)&kp DOWN    &kp LC(RIGHT)&kp PG_DN      &kp LC(DEL) &kp DEL     &kp ENTER   &none       &kp ESC
+            &kp END     &kp LC(LEFT)&kp DOWN    &kp LC(RIGHT)&kp PG_DN      &kp DEL     &kp LC(DEL) &kp ENTER   &none       &kp ESC
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
@@ -93,8 +93,8 @@
         num_layer {
             bindings = <
             &kp FSLH    &kp N7      &kp N8      &kp N9      &kp MINUS       &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)
-            &kp N0      &kp N4      &kp N5      &kp N6      &kp PLUS        &kp UNDER   &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
-            &kp ASTRK   &kp N1      &kp N2      &kp N3      &kp DOT         &kp COMMA   &kp DEL     &kp SPACE   &none       &kp ESC
+            &kp N0      &kp N4      &kp N5      &kp N6      &kp PLUS        &kp BSPC    &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
+            &kp ASTRK   &kp N1      &kp N2      &kp N3      &kp DOT         &kp DEL     &kp UNDER   &kp COMMA   &kp SPACE   &kp ESC
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
@@ -104,7 +104,7 @@
             bindings = <
             &kp F12     &kp F7      &kp F8      &kp F9      &kp PSCRN       &none       &kp C_VOL_DN &kp C_MUTE  &kp C_VOL_UP &none
             &kp F11     &kp F4      &kp F5      &kp F6      &none           &none       &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
-            &kp F10     &kp F1      &kp F2      &kp F3      &none           &none       &kp DEL     &none       &none       &kp ESC
+            &kp F10     &kp F1      &kp F2      &kp F3      &none           &kp DEL     &none       &none       &none       &kp ESC
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
