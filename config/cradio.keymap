@@ -63,7 +63,7 @@
         lt_nav_spc: lt_nav_spc {
             label = "ZB_lt_nav_spc";
             compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <2>;
+            #binding-cells = <0>;
             bindings = <&lt NAV SPACE>, <&dot_spc>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -78,7 +78,7 @@
         lt_num_bs_del: lt_num_bs_del {
             label = "ZB_lt_num_bs_del";
             compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <2>;
+            #binding-cells = <0>;
             bindings = <&lt NUM BSPC>, <&kp DEL>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
