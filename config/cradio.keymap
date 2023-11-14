@@ -35,6 +35,7 @@
     behaviors {
         // See https://github.com/urob/zmk-config#timeless-homerow-mods
         hml: hml {
+            label = "ZB_hml";
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             bindings = <&kp>, <&kp>;
@@ -46,6 +47,7 @@
             hold-trigger-on-release;             // delay positional check until key-release
         };
         hmr: hmr {
+            label = "ZB_hmr";
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             bindings = <&kp>, <&kp>;
@@ -59,12 +61,14 @@
         // More goodies from:
         //   https://github.com/urob/zmk-config/blob/main/config/base.keymap
         lt_nav_spc: lt_nav_spc {
+            label = "ZB_lt_nav_spc";
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <2>;
             bindings = <&lt NAV SPACE>, <&dot_spc>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
         dot_spc: dot_spc {
+            label = "ZB_dot_spc";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
@@ -72,6 +76,7 @@
             bindings = <&kp DOT &kp SPACE &sk LSHFT>;
         };
         lt_num_bs_del: lt_num_bs_del {
+            label = "ZB_lt_num_bs_del";
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <2>;
             bindings = <&lt NUM BSPC>, <&kp DEL>;
