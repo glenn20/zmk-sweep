@@ -31,6 +31,12 @@
     quick-tap-ms = <175>;
 };
 
+&mt {  // mod-tap config
+    flavor = "balanced";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <175>;
+};
+
 / {
     behaviors {
         // See https://github.com/urob/zmk-config#timeless-homerow-mods
@@ -107,13 +113,13 @@
         combo_left_thumb {
             timeout-ms = <500>;
             key-positions = <30 31>;
-            bindings = <&lt SETTINGS ESC>;
+            bindings = <&mo SETTINGS>;
         };
         // Both right keys
         combo_right_thumb {
             timeout-ms = <500>;
             key-positions = <32 33>;
-            bindings = <&sk LSHFT>;
+            bindings = <&mo FUN>;
         };
     };
 
@@ -124,9 +130,9 @@
         default_layer {
             bindings = <
             &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
-            HL( A,          S,          D,          F)      &kp G           &kp H        HR(J,          K,          L,          SEMI)
+            HL( A,          S,          D,          F)      &kp G           &kp H        HR(J,          K,          L,          ENTER)
             &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC
-                                        &lt FUN TAB  &lt SYM ENTER          &lt_nav_spc  &lt_num_bs_del
+                                        &lt NAV TAB  &lt SYM ENTER          &mt LSHIFT SPACE  &lt_num_bs_del
             >;
         };
 
@@ -143,9 +149,9 @@
         // Navigation
         nav_layer {
             bindings = <
-            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp LC(D)   &caps_word  &none       &none       &none
-            &kp HOME    &kp LEFT    &kp UP      &kp RIGHT   &kp PG_UP       &kp LC(BSPC)&kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
-            &kp END     &kp LC(LEFT)&kp DOWN    &kp LC(RIGHT)&kp PG_DN      &kp DEL     &kp LC(DEL) &kp ENTER   &none       &kp ESC
+            &kp HOME    &kp LC(LEFT)&kp LC(RIGHT)&kp END    &kp PG_UP       &kp LC(D)   &caps_word  &none       &none       &none
+            &kp LEFT    &kp UP      &kp DOWN    &kp RIGHT   &kp PG_DN       &kp LC(BSPC)&kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
+            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp DEL     &kp LC(DEL) &kp ENTER   &none       &kp ESC
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
@@ -163,7 +169,7 @@
         // Function keys and media
         fun_layer {
             bindings = <
-            &kp F12     &kp F7      &kp F8      &kp F9      &kp PSCRN       &none       &kp C_VOL_DN &kp C_MUTE  &kp C_VOL_UP &none
+            &kp F12     &kp F7      &kp F8      &kp F9      &kp PSCRN       &kp C_SLEEP &kp C_VOL_DN &kp C_MUTE  &kp C_VOL_UP &kp C_PWR
             &kp F11     &kp F4      &kp F5      &kp F6      &none           &none       &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
             &kp F10     &kp F1      &kp F2      &kp F3      &none           &kp DEL     &none       &none       &none       &kp ESC
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
