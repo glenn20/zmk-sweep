@@ -132,7 +132,7 @@
             &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
             HL( A,          S,          D,          F)      &kp G           &kp H        HR(J,          K,          L,          ENTER)
             &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC
-                                        &lt NAV TAB  &lt SYM ENTER          &mt LSHIFT SPACE  &lt_num_bs_del
+                                        &lt NAV TAB &lt SYM ENTER           &mt LSHIFT SPACE &lt_num_bs_del
             >;
         };
 
@@ -149,8 +149,8 @@
         // Navigation
         nav_layer {
             bindings = <
-            &kp HOME    &kp LC(LEFT)&kp LC(RIGHT)&kp END    &kp PG_UP       &kp LC(D)   &caps_word  &none       &none       &none
-            &kp LEFT    &kp UP      &kp DOWN    &kp RIGHT   &kp PG_DN       &kp LC(BSPC)&kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
+            &kp LC(LEFT)&kp PG_UP   &kp PG_DN   &kp LC(RIGHT)&kp HOME       &kp LC(D)   &caps_word  &none       &none       &none
+            &kp LEFT    &kp UP      &kp DOWN    &kp RIGHT   &kp END         &kp LC(BSPC)&kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
             &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp DEL     &kp LC(DEL) &kp ENTER   &none       &kp ESC
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
