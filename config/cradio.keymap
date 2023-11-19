@@ -64,31 +64,6 @@
             hold-trigger-key-positions = <KEYS_L THUMBS>;
             hold-trigger-on-release;
         };
-        // More goodies from:
-        //   https://github.com/urob/zmk-config/blob/main/config/base.keymap
-        lt_nav_spc: lt_nav_spc {
-            label = "ZB_lt_nav_spc";
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&lt NAV SPACE>, <&dot_spc>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-        dot_spc: dot_spc {
-            label = "ZB_dot_spc";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <0>;
-            tap-ms = <5>;
-            bindings = <&kp DOT &kp SPACE &sk LSHFT>;
-        };
-        lt_num_bs_del: lt_num_bs_del {
-            label = "ZB_lt_num_bs_del";
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&lt NUM BSPC>, <&kp DEL>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
     };
     macros {
         // sometimes my device thinks a modifier is being held down
@@ -132,7 +107,7 @@
             &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
             HL( A,          S,          D,          F)      &kp G           &kp H        HR(J,          K,          L,          ENTER)
             &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC
-                                        &lt NAV TAB &lt SYM ENTER           &mt LSHIFT SPACE &lt_num_bs_del
+                                        &lt NAV TAB &lt SYM ENTER           &mt LSHIFT SPACE &lt NUM BSPC
             >;
         };
 
@@ -179,10 +154,10 @@
         // Used to change the keyboard's settings.
         settings_layer {
             bindings = <
-            &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &sys_reset  &kp LS(LC(LA(LEFT))) &kp LS(LC(LA(DOWN))) &kp LS(LC(LA(UP))) &kp LS(LC(LA(RIGHT)))
-            &kp C_SLEEP  &kp C_PWR    &none        &none        &out OUT_USB    &bootloader &kp LC(LA(LEFT)) &kp LC(LA(DOWN)) &kp LC(LA(UP)) &kp LC(LA(RIGHT))
-            &sys_reset   &bootloader  &bt BT_CLR   &unstick     &out OUT_BLE    &none       &kp LG(LEFT) &kp LG(DOWN) &kp LG(UP) &kp LG(RIGHT)
-                                                   &none        &none           &kp N9      &none
+            &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &none       &kp LS(LC(LA(LEFT))) &kp LS(LC(LA(DOWN))) &kp LS(LC(LA(UP))) &kp LS(LC(LA(RIGHT)))
+            &none        &none        &none        &none        &sys_reset     &sys_reset  &kp LC(LA(LEFT)) &kp LC(LA(DOWN)) &kp LC(LA(UP)) &kp LC(LA(RIGHT))
+            &out OUT_USB &out OUT_BLE &bt BT_CLR   &unstick     &bootloader    &bootloader &kp LG(LEFT) &kp LG(DOWN) &kp LG(UP) &kp LG(RIGHT)
+                                                   &none        &none          &kp N9      &none
             >;
         };
     };
