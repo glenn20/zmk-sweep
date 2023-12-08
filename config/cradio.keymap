@@ -16,7 +16,6 @@
 #define NUM 3
 #define FUN 4
 #define SETTINGS 5
-// -----------------
 
 #define HL(k1,k2,k3,k4) &hml LGUI  k1 &hml LALT  k2 &hml LCTRL k3 &hml LSHFT k4
 #define HR(k1,k2,k3,k4) &hmr RSHFT k1 &hmr RCTRL k2 &hmr RALT  k3 &hmr RGUI  k4
@@ -101,18 +100,15 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // Base alpha layer
-        default_layer {
+        default_layer { // Base alpha layer
             bindings = <
             &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
-            HL( A,          S,          D,          F)      &kp G           &kp H        HR(J,          K,          L,          ENTER)
+            HL( A,          S,          D,          F)      &kp G           &kp H        HR(J,          K,          L,          DEL)
             &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC
                                         &lt NAV TAB &lt SYM ENTER           &mt LSHIFT SPACE &lt NUM BSPC
             >;
         };
-
-        // Symbols
-        sym_layer {
+        sym_layer { // Symbols
             bindings = <
             &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT       &kp CARET   &kp AMPS    &kp ASTRK   &kp PIPE    &kp QMARK
             HL( GRAVE,      LT,         LBKT,       LPAR)   &kp LBRC        &kp FSLH    HR( MINUS,      EQUAL,      DQT,        SEMI)
@@ -120,9 +116,7 @@
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
-
-        // Navigation
-        nav_layer {
+        nav_layer { // Navigation
             bindings = <
             &kp LC(LEFT)&kp PG_UP   &kp PG_DN   &kp LC(RIGHT)&kp HOME       &kp LC(D)   &caps_word  &none       &none       &none
             &kp LEFT    &kp UP      &kp DOWN    &kp RIGHT   &kp END         &kp LC(BSPC)&kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
@@ -130,9 +124,7 @@
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
-
-        // Numbers
-        num_layer {
+        num_layer { // Numbers
             bindings = <
             &kp FSLH    &kp N7      &kp N8      &kp N9      &kp MINUS       &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)
             &kp N0      &kp N4      &kp N5      &kp N6      &kp PLUS        &kp BSPC    &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
@@ -140,9 +132,7 @@
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
-
-        // Function keys and media
-        fun_layer {
+        fun_layer { // Function keys and media
             bindings = <
             &kp F12     &kp F7      &kp F8      &kp F9      &kp PSCRN       &kp C_SLEEP &kp C_VOL_DN &kp C_MUTE  &kp C_VOL_UP &kp C_PWR
             &kp F11     &kp F4      &kp F5      &kp F6      &none           &none       &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
@@ -150,9 +140,7 @@
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
-
-        // Used to change the keyboard's settings.
-        settings_layer {
+        settings_layer { // Used to change the keyboard's settings.
             bindings = <
             &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &none       &kp LS(LC(LA(LEFT))) &kp LS(LC(LA(DOWN))) &kp LS(LC(LA(UP))) &kp LS(LC(LA(RIGHT)))
             &none        &none        &none        &none        &sys_reset     &sys_reset  &kp LC(LA(LEFT)) &kp LC(LA(DOWN)) &kp LC(LA(UP)) &kp LC(LA(RIGHT))
