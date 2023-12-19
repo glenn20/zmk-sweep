@@ -37,8 +37,13 @@
 
 #### BASE layer
 
+Use qwerty layout with tweaks:
+
+- Put `DEL` key on middle right for convenience (in place of `;`)
+  - `DEL` is also provided on `NAV`, `NUM` and `FUN` layers
 - Put `ESC` key on bottom right for convenience (in place of `/`)
   - `ESC` is also duplicated to `NAV`, `NUM` and `FUN` layers
+- Shift-comma generates &caps_word to capitalise a word
 
 #### SYM layer
 
