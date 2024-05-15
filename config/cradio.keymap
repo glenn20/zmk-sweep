@@ -101,6 +101,12 @@
             key-positions = <32 33>;
             bindings = <&mo FUN>;
         };
+        // Q and W make escape
+        combo_qw_escape {
+            timeout-ms = <500>;
+            key-positions = <1 2>;
+            bindings = <&kp ESC>;
+        };
     };
 
     keymap {
