@@ -40,7 +40,6 @@
     behaviors {
         // See https://github.com/urob/zmk-config#timeless-homerow-mods
         hml: hml {
-            label = "ZB_hml";
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             bindings = <&kp>, <&kp>;
@@ -52,7 +51,6 @@
             hold-trigger-on-release;             // delay positional check until key-release
         };
         hmr: hmr {
-            label = "ZB_hmr";
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             bindings = <&kp>, <&kp>;
@@ -68,7 +66,6 @@
         // sometimes my device thinks a modifier is being held down
         // pressing all modifiers fixes it.
         unstick: unstick {
-            label = "ZB_unstick";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
