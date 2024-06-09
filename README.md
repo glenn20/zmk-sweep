@@ -1,7 +1,7 @@
 
 # My Ferris Zmk Layout
 
-![sweep-layout](./images/BaseKeymap.svg)
+![sweep-layout](./images/BaseKeymap.drawio.svg)
 
 ## Layout
 
@@ -13,6 +13,8 @@
 - Layer taps and mod taps customised following [@urob's timeless homerow
   mods](https://github.com/urob/zmk-config#timeless-homerow-mods)
 - lots of browsing other user's zmk configs and the excellent zmk docs
+- Relevant personal usage considerations:
+  - Left handed but use mouse on right hand
 
 #### Thumb keys
 
@@ -34,26 +36,27 @@
     - so `SYM`|`NAV`->`SPACE`|`BSPC` and `NUM`->`TAB`|`ENTER` will produce
       repeating keys when held.
   - Also use `quick-tap-ms=175` for repeat on fast click then hold
+- `ENTER`+`SPACE` is convenient shortcut to `ESC`
 
 #### BASE layer
 
-Use qwerty layout with tweaks:
-
-- Put `DEL` key on middle right for convenience (in place of `;`)
-  - `DEL` is also provided on `NAV`, `NUM` and `FUN` layers
-- Put `ESC` key on bottom right for convenience (in place of `/`)
-  - `ESC` is also duplicated to `NAV`, `NUM` and `FUN` layers
-- Shift-comma generates &caps_word to capitalise a word
+Use qwerty layout.
 
 #### SYM layer
 
 - Dedicated `SYM` layer - with a layout that makes sense to me
-  - all symbols can be accessed from this one layer without additional
-    modifiers
-  - symbols from the shifted number keys on a conventional keyboard along the
-    top row
-  - symbols stacked in logical pairs across middle and bottom rows
-  - parenthesis/bracket/brace pairs all on left hand
+  1. ``! @ # $ %`` --- `^ & * ? ESC`
+  1. `` ` ( ) [ ]`` --- `\ - = ' ;`
+  1. ``~ < > { }`` --- `| _ + " :`
+- all symbols can be accessed from this one layer without additional modifiers
+- symbols from the shifted number keys on a qwerty keyboard along the top row
+  (except brackets)
+- Left hand:
+  - `` ` `` and `~` on the left and parenthesis/bracket/brace pairs
+- Right hand:
+  - `\ - = ' ;` on middle row with _shifted_ variants on bottom row `| _ + " :`
+- `ESC` on inner right thumb key and upper right key
+  - To consider: remove ESC on inner thumb so we can have SPACE on SYM layer.
 
 #### NAV layer
 
@@ -64,10 +67,11 @@ Use qwerty layout with tweaks:
 - Easy to use with mouse on right hand
 - Experimented with a lot of layouts for navigation keys
   - initially on right side but works better on left (I am a lefty)
-  - initially used arrow keys in *inverted-T* on SDFC keys
+  - initially used arrow keys in _inverted-T_ on SDFC keys
     - liked this, but its more flexible to have all arrows on same row
   - arrow keys on home row which provide logical pairs with top row keys
 - Right hand includes `DEL`, `DEL-WORD` and `BSPC-WORD`
+- Line movement keys on top right hand row: dedent, line-down, line-up, indent
 
 #### NUM layer
 
@@ -96,8 +100,8 @@ Use qwerty layout with tweaks:
 
 #### Modifiers
 
-- `SHIFT` on right thumb key hold
-- Standard home-row modifiers (`SHIFT`, `CTRL`, `ALT`, `GUI`) on `ALPHA` and
+- `SHIFT` on right inner thumb key hold
+- Standard home-row modifiers (`SHIFT`, `CTRL`, `ALT`, `GUI`) on `BASE` and
   `SYM` layers
   - Using [@urob's timeless homerow
     mods](https://github.com/urob/zmk-config#timeless-homerow-mods)
