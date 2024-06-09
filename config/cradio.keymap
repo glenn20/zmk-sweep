@@ -17,6 +17,7 @@
 #define FUN 4
 #define SETTINGS 5
 
+// Home row modifiers: see https://github.com/urob/zmk-config#timeless-homerow-mods
 #define HL(k1,k2,k3,k4) &hml LGUI  k1 &hml LALT  k2 &hml LCTRL k3 &hml LSHFT k4
 #define HR(k1,k2,k3,k4) &hmr RSHFT k1 &hmr RCTRL k2 &hmr RALT  k3 &hmr RGUI  k4
 
@@ -62,24 +63,8 @@
             hold-trigger-on-release;
         };
     };
-    macros {
-        // sometimes my device thinks a modifier is being held down
-        // pressing all modifiers fixes it.
-        unstick: unstick {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&kp LSHIFT &kp RSHIFT &kp LCTRL &kp RCTRL &kp LALT &kp RALT &kp LGUI &kp RGUI>;
-        };
-    };
     combos {
         compatible = "zmk,combos";
-        // Press all the left home keys to unstick modifiers.
-        combo_unstick {
-            timeout-ms = <100>;
-            key-positions = <10 11 12 13>;
-            bindings = <&unstick>;
-        };
         // Both left keys - SETTINGS layer
         combo_left_thumb {
             timeout-ms = <500>;
@@ -146,9 +131,9 @@
         };
         settings_layer { // Used to change the keyboard's settings.
             bindings = <
-            &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &none       &kp LS(LC(LA(LEFT))) &kp LS(LC(LA(DOWN))) &kp LS(LC(LA(UP))) &kp LS(LC(LA(RIGHT)))
-            &none        &none        &none        &none        &sys_reset     &sys_reset  &kp LC(LA(LEFT)) &kp LC(LA(DOWN)) &kp LC(LA(UP)) &kp LC(LA(RIGHT))
-            &out OUT_USB &out OUT_BLE &bt BT_CLR   &unstick     &bootloader    &bootloader &kp LG(LEFT) &kp LG(DOWN) &kp LG(UP) &kp LG(RIGHT)
+            &out OUT_USB &none        &none        &none        &bt BT_CLR     &none       &kp LS(LC(LA(LEFT))) &kp LS(LC(LA(DOWN))) &kp LS(LC(LA(UP))) &kp LS(LC(LA(RIGHT)))
+            &out OUT_BLE &bt BT_SEL 4 &none        &none        &sys_reset     &sys_reset  &kp LC(LA(LEFT)) &kp LC(LA(DOWN)) &kp LC(LA(UP)) &kp LC(LA(RIGHT))
+            &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bootloader    &bootloader &kp LG(LEFT) &kp LG(DOWN) &kp LG(UP) &kp LG(RIGHT)
                                                    &none        &none          &to BASE    &to NUM
             >;
         };
