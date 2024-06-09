@@ -22,8 +22,7 @@ SHIELDS="cradio_left cradio_right"  # For my Ferris Sweep
 
 # Map device serial numbers reported by lsusb to firmware filenames
 # udevadm info --name=/dev/sda | grep SERIAL
-declare -A devices
-devices=( \
+declare -A devices=( \
     [Adafruit_nRF_UF2_FD8F9FF134676FF6-0:0]=zmk_cradio_left_nice_nano_v2.uf2 \
     [Adafruit_nRF_UF2_167EB14F64D5C3F6-0:0]=zmk_cradio_right_nice_nano_v2.uf2 \
 )
@@ -56,7 +55,7 @@ flash=$(isopt -f)
 [[ $(isopt -[^cuif]) == "yes" ]] && Usage
 
 log() { echo -e "\033[0;32m### $@\033[0m"; }
-warn() { echo -e "\033[0;31m### $@\033[0m"; }
+warn() { echo -e "\033[0;31m### $@\033[0m" 1>&2; }
 
 if [ -d "$WORKSPACE" ]; then
     # We are running inside the container: build the firmware
@@ -153,6 +152,7 @@ fi
 
 cd "$CONFIGDIR"
 [ ! -d "$FIRMWARE" ] && mkdir -p "$FIRMWARE"
+log "Saving firmware files to '$FIRMWARE'..."
 for shield in $SHIELDS; do
     cp -upv "$ZMKDIR/app/build/$shield/zephyr/zmk.uf2" "$FIRMWARE/zmk_${shield}_${MCU}.uf2"
 done
@@ -169,22 +169,26 @@ if [ "$flash" = "yes" ]; then
             device=$(readlink -e "/dev/disk/by-id/usb-$serial" || true)
             if [ -n "$device" ]; then
                 mount=$(findmnt -n -o TARGET --source $device 2>/dev/null || true)
-                uf2=${devices[$serial]}
-                if [ -f "$FIRMWARE/$uf2" -a -n "$mount" ]; then
+                if [ -n "$mount" ]; then
+                    uf2=${devices[$serial]}
+                    if [ ! -f "$FIRMWARE/$uf2" ]; then
+                        warn "Error: $FIRMWARE/$uf2 not found." && exit 1
+                    fi
+                    echo
                     log "Flashing $FIRMWARE/$uf2..."
                     cp -v $FIRMWARE/$uf2 $mount/$uf2
-                else
-                    warn "Error: $FIRMWARE/$uf2 not found." 1>&2
+                    log "Firmware flashed successfully."
+                    exit 0
                 fi
-                exit 0
             fi
         done
+        sleep 0.2
         if [ $SECONDS -gt $cur ]; then
             echo -n "$((end-$SECONDS))..."
             cur=$SECONDS
         fi
     done
-    warn "\nTimed out waiting for devices to flash firmware." 1>&2
+    warn "\nTimed out waiting for devices to flash firmware."
     exit 1
 fi
 
