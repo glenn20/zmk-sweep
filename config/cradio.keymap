@@ -49,7 +49,7 @@
             hold-trigger-key-positions = <KEYS_R THUMBS>; // Only hold if key is on the other side
             hold-trigger-on-release;            // Wait in case another modifier is pressed
             tapping-term-ms = <280>;            // Force hold after 280ms
-            quick-tap-ms = <175>;               // Produce repeating tap if double tapped within 175ms
+            quick-tap-ms = <200>;               // Produce repeating tap if double tapped within 175ms
         };
         hmr: hmr {
             compatible = "zmk,behavior-hold-tap";
@@ -60,7 +60,7 @@
             hold-trigger-key-positions = <KEYS_L THUMBS>;
             hold-trigger-on-release;
             tapping-term-ms = <280>;
-            quick-tap-ms = <175>;
+            quick-tap-ms = <200>;
         };
     };
     combos {
