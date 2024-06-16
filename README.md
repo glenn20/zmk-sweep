@@ -40,14 +40,19 @@
 
 #### BASE layer
 
-Use qwerty layout.
+- Use qwerty layout (includes `; , . /` keys)
+
+  - `q w e r t` --- `y u i o p`
+  - `a s d f g` --- `h j k l ;`
+  - `z x c v b` --- `n m , . /`
+    - `TAB ENTER` - `SPC BSPC`
 
 #### SYM layer
 
 - Dedicated `SYM` layer - with a layout that makes sense to me
-  1. ``! @ # $ %`` --- `^ & * ? ESC`
-  1. `` ` ( ) [ ]`` --- `\ - = ' ;`
-  1. ``~ < > { }`` --- `| _ + " :`
+  - ``! @ # $ %`` --- `^ & * ? ESC`
+  - `` ` ( ) [ ]`` --- `\ - = ' ;`
+  - ``~ < > { }`` --- `| _ + " :`
 - all symbols can be accessed from this one layer without additional modifiers
 - symbols from the shifted number keys on a qwerty keyboard along the top row
   (except brackets)
@@ -55,15 +60,15 @@ Use qwerty layout.
   - `` ` `` and `~` on the left and parenthesis/bracket/brace pairs
 - Right hand:
   - `\ - = ' ;` on middle row with _shifted_ variants on bottom row `| _ + " :`
-- `ESC` on inner right thumb key and upper right key
+- `ESC` on inner right thumb key (`SPACE` key) and upper right key
   - To consider: remove ESC on inner thumb so we can have SPACE on SYM layer.
 
 #### NAV layer
 
 - `NAV` layer key and main `NAV` keys on left side:
-  - `LEFT-WORD`, `PGUP`, `PGDN`, `RIGHT-WORD`, `HOME`.
-  - `LEFT`, `UP`, `DOWN`, `RIGHT`, `END`
-  - `UNDO`, `CUT`, `COPY`, `PASTE`, `REDO`
+  - `LEFT-WORD PGUP PGDN RIGHT-WORD HOME`
+  - `LEFT UP DOWN RIGHT END`
+  - `UNDO CUT COPY PASTE REDO`
 - Easy to use with mouse on right hand
 - Experimented with a lot of layouts for navigation keys
   - initially on right side but works better on left (I am a lefty)
