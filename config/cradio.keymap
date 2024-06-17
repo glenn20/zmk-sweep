@@ -40,7 +40,7 @@
 / {
     behaviors {
         // See https://github.com/urob/zmk-config#timeless-homerow-mods
-        hml: hml {
+        hml: hml {  // Left side Home Row Modifiers
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             bindings = <&kp>, <&kp>;
@@ -51,7 +51,7 @@
             tapping-term-ms = <280>;            // Force hold after 280ms
             quick-tap-ms = <200>;               // Produce repeating tap if double tapped within 175ms
         };
-        hmr: hmr {
+        hmr: hmr {  // Right side Home Row Modifiers
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             bindings = <&kp>, <&kp>;

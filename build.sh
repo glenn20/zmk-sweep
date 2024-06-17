@@ -7,11 +7,12 @@
 #  It uses the west tool to build the firmware and copies the resulting UF2
 #  files to the zmk-config/firmware directory.
 
-#  The script takes an optional -p argument to clean the build directory for a
+#  The script takes an optional -c argument to clean the build directory for a
 #  clean build before building the firmware.
 
-#  If running outside the zmk docker container - start it and run the script
-#  inside the container (requires the vscode devcontainer cli installed
+#  If running outside the zmk docker container - this script will start it and
+#  run the script inside the container (requires the vscode devcontainer cli
+#  installed
 #  - https://code.visualstudio.com/docs/devcontainers/devcontainer-cli).
 
 set -e
