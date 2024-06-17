@@ -71,7 +71,7 @@ if [ -d "$WORKSPACE" ]; then
         git pull  # Update the zmk source code
         west update  # Update the zmk build environment (including zephyr)
     fi
-    cd ./app
+    pushd ./app
     for shield in $SHIELDS; do
         if [ -d build/$shield -a "$clean" != "yes" -a "$update" != "yes" ]; then
             # Perform a build without cleaning
@@ -83,20 +83,20 @@ if [ -d "$WORKSPACE" ]; then
             west build -d build/$shield -p -b $MCU -- -DSHIELD=$shield -DZMK_CONFIG=$MYCONFIG/config
         fi
     done
-    cd "$WORKSPACE"
+    popd
     chown -R $(stat -c %u:%g .) .west app/build  # Set ownership of build files
     exit 0
 fi
 
 # We are running outside the container - send the build command to the container
-cd $CONFIGDIR
-if [ ! -d "config" ]; then
+if [ ! -d "$CONFIGDIR/config" ]; then
     warn "Error: '$CONFIGDIR/config' directory not found." 1>&2
     log "Run '$0' in your zmk config base directory." 1>&2
     log "See https://zmk.dev/docs/user-setup to create a new config." 1>&2
     exit 1
 fi
 
+cd $CONFIGDIR
 if [ "$install" = "yes" ]; then
     # Install or re-install the zmk build environment and devcontainer
     # See https://zmk.dev/docs/development/setup/docker
@@ -112,46 +112,41 @@ if [ "$install" = "yes" ]; then
     git clone "$ZMKREPO" "$ZMKDIR"
 
     # Setup the zmk-config docker volume
-    if docker volume inspect $VOLUME > /dev/null 2>&1; then
+    if docker volume inspect "$VOLUME" > /dev/null 2>&1; then
         # Remove the existing docker volume
-        log "Deleting existing $VOLUME docker volume..."
+        log "Deleting existing '$VOLUME' docker volume..."
         id=$(  # Try deleting the volume - get the container id if in use
-            docker volume rm $VOLUME 2>&1 | \
+            docker volume rm "$VOLUME" 2>&1 | \
             sed -n 's/^Error.*: volume is in use - \[\([0-9a-f]*\)\]$/\1/p'
         )
         if [ -n "$id" ]; then
-            log "Stopping and removing container using $VOLUME docker volume..."
+            log "Stopping and removing container using '$VOLUME' docker volume..."
             docker stop $id > /dev/null || /bin/true # Stop the container using the volume
             docker rm $id > /dev/null   # Remove the container using the volume
-            docker volume rm $VOLUME > /dev/null
+            docker volume rm "$VOLUME" > /dev/null
         fi
     fi
-    log "Creating $VOLUME docker volume bound to '$CONFIGDIR'..."
-    docker volume create --driver local -o o=bind -o type=none -o device="$CONFIGDIR" $VOLUME
-    log "Building the zmk devcontainer..."
+    log "Creating '$VOLUME' docker volume bound to '$CONFIGDIR'..."
+    docker volume create --driver local -o o=bind -o type=none -o device="$CONFIGDIR" "$VOLUME"
 
     # Build the devcontainer
-    cd "$ZMKDIR"
+    log "Building the zmk devcontainer..."
+    pushd "$ZMKDIR"
     devcontainer build || ( log "Install failed."; exit 1 )
+    popd
 fi
 
-cd "$CONFIGDIR"
-cd "$ZMKDIR" || (warn "Error: '$ZMKDIR' directory not found. Run '$0 -i' to install." && exit 1)
-id=""
-if ! devcontainer exec /bin/true > /dev/null; then
-    # If the container is not running - start it
-    id=$(devcontainer up | sed -n 's/^.*containerId":"\([0-9a-f]*\)".*$/\1/p')
-    # devcontainer up | tail -1 | jq -r .containerId
-fi
-
-# Now re-run this script inside the devcontainer...
+# Now re-run this script inside the devcontainer to run the build...
 log "Running build inside the '$ZMKDIR' devcontainer..."
+pushd "$ZMKDIR" || (warn "Error: '$ZMKDIR' directory not found. Run '$0 -i' to install." && exit 1)
+# Start the devcontainer (id is empty if the container is already running)
+id=$(devcontainer up | sed -n 's/^.*Start: Run: docker start \([0-9a-f]*\).*$/\1/p')
 devcontainer exec "$MYCONFIG/build.sh" $@
 if [ -n "$id" ]; then
     docker stop $id > /dev/null  # Stop the container if we started it
 fi
+popd
 
-cd "$CONFIGDIR"
 [ ! -d "$FIRMWARE" ] && mkdir -p "$FIRMWARE"
 log "Saving firmware files to '$FIRMWARE'..."
 for shield in $SHIELDS; do
@@ -168,9 +163,11 @@ if [ "$flash" = "yes" ]; then
     # Search for mounted usb devices which match those in the $devices array
     for i in {20..0}; do
         for j in {5..1}; do
-            for serial in "${!devices[@]}"; do
+            for serial in "${!devices[@]}"; do  # loop over all the keys in the array
+                # Check if the device is connected
                 device=$(readlink -e "/dev/disk/by-id/usb-$serial" || true)
                 if [ -n "$device" ]; then
+                    # Check if the device is mounted
                     mount=$(findmnt -n -o TARGET --source $device 2>/dev/null || true)
                     if [ -n "$mount" ]; then
                         uf2=${devices[$serial]}
@@ -178,6 +175,7 @@ if [ "$flash" = "yes" ]; then
                             warn "Error: $FIRMWARE/$uf2 not found." && exit 1
                         fi
                         echo
+                        # Copy new firmware to the device
                         log "Flashing $FIRMWARE/$uf2..."
                         cp -v $FIRMWARE/$uf2 $mount/$uf2
                         log "Firmware flashed successfully."
@@ -192,6 +190,3 @@ if [ "$flash" = "yes" ]; then
     echo
     warn "Timed out waiting for devices to flash firmware." && exit 1
 fi
-
-exit $status
-
