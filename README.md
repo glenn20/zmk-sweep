@@ -36,7 +36,13 @@
     - so `SYM`|`NAV`->`SPACE`|`BSPC` and `NUM`->`TAB`|`ENTER` will produce
       repeating keys when held.
   - Also use `quick-tap-ms=225` for repeat on fast click then hold
-- `ENTER`+`SPACE` is convenient shortcut to `ESC`
+- `ENTER`+`SPACE` as combo key is convenient shortcut to `ESC` key
+- On SETTINGS layer:
+  - `NUM` key locks the `NUM` layer on
+  - `SPC` key returns to BASE layer
+- On FUN layer:
+  - `NAV` key locks the `NAV` layer on
+  - `SYM` key returns to BASE layer
 
 #### BASE layer
 
@@ -53,7 +59,7 @@
   - ``! @ # $ %`` --- `^ & * ? ESC`
   - `` ` ( ) [ ]`` --- `\ - = ' ;`
   - ``~ < > { }`` --- `| _ + " :`
-    - `TAB ENTER` - `ESC DEL`
+    - `TAB ENTER` - `SPC DEL`
   - all symbols can be accessed from this one layer without additional modifier
     - except `.` and `,` which are on BASE layer
   - symbols from the shifted number keys on a qwerty keyboard along the top row
@@ -63,9 +69,9 @@
 - Right hand:
   - `\ - = ' ;` on middle row with _shifted_ variants on bottom row `| _ + " :`
 - Thumbs:
-  - `ESC` on inner right thumb key (`SPACE` key) and upper right key
-    - To consider: remove ESC on inner thumb so we can have SPACE on SYM layer.
   - `DEL` on outer right thumb key
+  - `ESC` on inner left+right thumb combo key, yet still a SPC key if pressed
+    after a first symbol key, ie. `$` `SPC` `%` produces `$ %`
 
 #### NAV layer
 
@@ -107,13 +113,13 @@
 
 #### SETTINGS layer
 
-- includes **bluetooth**, **reboot**, **reflash** and **output** control on left
+- includes **bluetooth**, **reset**, **reflash** and **output** control on left
   hand
-  - `USB --- --- --- BTCLR` --- `SLEEP SFT-CTL-ALT-(LEFT DOWN UP RIGHT)`
+  - `USB --- --- --- BTCLR` --- `----- SFT-CTL-ALT-(LEFT DOWN UP RIGHT)`
   - `BLE bt4 --- --- RESET` --- `RESET CTL-ALT-(LEFT DOWN UP RIGHT)`
   - `bt0 bt1 bt2 bt3 FLASH` --- `FLASH GUI-(LEFT DOWN UP RIGHT)`
     - `--- ---` - `BASE NUM`
-- Desktop navigation keys on right hand (and **reboot**, **reflash**):
+- Desktop navigation keys on right hand (and **reset**, **reflash**):
   - top row: move window to desktop
   - middle row: switch to desktop
   - bottom row: move window to side of this desktop
