@@ -35,7 +35,7 @@
   - Repeating (non-modifier) versions of each key are on other layers
     - so `SYM`|`NAV`->`SPACE`|`BSPC` and `NUM`->`TAB`|`ENTER` will produce
       repeating keys when held.
-  - Also use `quick-tap-ms=175` for repeat on fast click then hold
+  - Also use `quick-tap-ms=225` for repeat on fast click then hold
 - `ENTER`+`SPACE` is convenient shortcut to `ESC`
 
 #### BASE layer
@@ -49,19 +49,23 @@
 
 #### SYM layer
 
-- Dedicated `SYM` layer - with a layout that makes sense to me
+- Put all symbol keys on a single layer - with a layout that makes sense to me
   - ``! @ # $ %`` --- `^ & * ? ESC`
   - `` ` ( ) [ ]`` --- `\ - = ' ;`
   - ``~ < > { }`` --- `| _ + " :`
-- all symbols can be accessed from this one layer without additional modifiers
-- symbols from the shifted number keys on a qwerty keyboard along the top row
-  (except brackets)
+    - `TAB ENTER` - `ESC DEL`
+  - all symbols can be accessed from this one layer without additional modifier
+    - except `.` and `,` which are on BASE layer
+  - symbols from the shifted number keys on a qwerty keyboard along the top row
+    (except brackets)
 - Left hand:
   - `` ` `` and `~` on the left and parenthesis/bracket/brace pairs
 - Right hand:
   - `\ - = ' ;` on middle row with _shifted_ variants on bottom row `| _ + " :`
-- `ESC` on inner right thumb key (`SPACE` key) and upper right key
-  - To consider: remove ESC on inner thumb so we can have SPACE on SYM layer.
+- Thumbs:
+  - `ESC` on inner right thumb key (`SPACE` key) and upper right key
+    - To consider: remove ESC on inner thumb so we can have SPACE on SYM layer.
+  - `DEL` on outer right thumb key
 
 #### NAV layer
 
@@ -69,7 +73,7 @@
   - `LEFT-WORD PGUP PGDN RIGHT-WORD HOME`
   - `LEFT UP DOWN RIGHT END`
   - `UNDO CUT COPY PASTE REDO`
-- Easy to use with mouse on right hand
+- Easy to use along with mouse on right hand
 - Experimented with a lot of layouts for navigation keys
   - initially on right side but works better on left (I am a lefty)
   - initially used arrow keys in _inverted-T_ on SDFC keys
@@ -81,27 +85,38 @@
 #### NUM layer
 
 - Num-pad like arrangement on left hand
+  - `/ 7 8 9 -` --- `UNDO CUT COPY PASTE REDO`
+  - `* 4 5 6 +` --- `DEL SFT CTL ALT GUI`
+  - `0 1 2 3 .` --- `BSPC _ , SPC ESC`
+    - `TAB ENTER` - `SPC BSPC`
   - includes `*`, `/`, `+`, `-` keys
 - Right side includes `_` and `,` for typing numbers
   - `UNDO`, `CUT`, `COPY`, `PASTE`, `REDO` on top row and `BSPC`, `DEL` on inner
     column
+- NUM lock layer using `NAV+SYM+NUM`
 
 #### FUN layer (Function keys)
 
 - `F1-F9` function keys on number key locations
-- `F10`, `F11` and `F12` are on left little finger column (from bottom to top).
+- `F10-F12` on left little finger column.
+  - `f12 f7 f8 f9 PRNT` --- `SLEEP VOL- MUTE VOL+ POWER`
+  - `f11 f4 f5 f6 ----` --- `---- SFT CTL ALT GUI`
+  - `f10 f1 f2 f3 ----` --- `---- --- --- --- ---`
+    - `NAV BASE` - `SPC BSPC`
 - includes media volume and pc power control keys on right side
 
 #### SETTINGS layer
 
 - includes **bluetooth**, **reboot**, **reflash** and **output** control on left
   hand
+  - `USB --- --- --- BTCLR` --- `SLEEP SFT-CTL-ALT-(LEFT DOWN UP RIGHT)`
+  - `BLE bt4 --- --- RESET` --- `RESET CTL-ALT-(LEFT DOWN UP RIGHT)`
+  - `bt0 bt1 bt2 bt3 FLASH` --- `FLASH GUI-(LEFT DOWN UP RIGHT)`
+    - `--- ---` - `BASE NUM`
 - Desktop navigation keys on right hand (and **reboot**, **reflash**):
-  - top row: `SHIFT`-`CTRL`-`ALT`-(`LEFT`, `DOWN`, `UP`, `RIGHT`): move window
-    to desktop
-  - middle row: `CTRL`-`ALT`-(`LEFT`, `DOWN`, `UP`, `RIGHT`): switch to desktop
-  - bottom row: `GUI`-(`LEFT`, `DOWN`, `UP`, `RIGHT`): move window to side of
-    desktop
+  - top row: move window to desktop
+  - middle row: switch to desktop
+  - bottom row: move window to side of this desktop
 
 #### Modifiers
 
