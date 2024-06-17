@@ -161,36 +161,36 @@ ls -lR "$FIRMWARE"
 
 if [ "$flash" = "yes" ]; then
     # Flash the firmware to the devices
+    if [ -z "${!devices[*]}" ]; then
+        warn "Error: No devices provided." && exit 1
+    fi
     log "Searching for devices to flash firmware..."
-    end=$((SECONDS+20))
-    cur=$((SECONDS))
     # Search for mounted usb devices which match those in the $devices array
-    while [ $cur -lt $end -a "${!devices[*]}" != "" ]; do
-        for serial in "${!devices[@]}"; do
-            device=$(readlink -e "/dev/disk/by-id/usb-$serial" || true)
-            if [ -n "$device" ]; then
-                mount=$(findmnt -n -o TARGET --source $device 2>/dev/null || true)
-                if [ -n "$mount" ]; then
-                    uf2=${devices[$serial]}
-                    if [ ! -f "$FIRMWARE/$uf2" ]; then
-                        warn "Error: $FIRMWARE/$uf2 not found." && exit 1
+    for i in {20..0}; do
+        for j in {5..1}; do
+            for serial in "${!devices[@]}"; do
+                device=$(readlink -e "/dev/disk/by-id/usb-$serial" || true)
+                if [ -n "$device" ]; then
+                    mount=$(findmnt -n -o TARGET --source $device 2>/dev/null || true)
+                    if [ -n "$mount" ]; then
+                        uf2=${devices[$serial]}
+                        if [ ! -f "$FIRMWARE/$uf2" ]; then
+                            warn "Error: $FIRMWARE/$uf2 not found." && exit 1
+                        fi
+                        echo
+                        log "Flashing $FIRMWARE/$uf2..."
+                        cp -v $FIRMWARE/$uf2 $mount/$uf2
+                        log "Firmware flashed successfully."
+                        exit 0
                     fi
-                    echo
-                    log "Flashing $FIRMWARE/$uf2..."
-                    cp -v $FIRMWARE/$uf2 $mount/$uf2
-                    log "Firmware flashed successfully."
-                    exit 0
                 fi
-            fi
+            done
+            sleep 0.2
         done
-        sleep 0.2
-        if [ $SECONDS -gt $cur ]; then
-            echo -n "$((end-$SECONDS))..."
-            cur=$SECONDS
-        fi
+        echo -n "${i}..."
     done
-    warn "\nTimed out waiting for devices to flash firmware."
-    exit 1
+    echo
+    warn "Timed out waiting for devices to flash firmware." && exit 1
 fi
 
 exit $status
