@@ -67,8 +67,7 @@ if [ -d "$WORKSPACE" ]; then
         west update  # Update the zmk build environment (including zephyr)
     fi
     if [ "$update" = "yes" ]; then
-        log "Update zmk source code and build environment (west update)..."
-        git pull  # Update the zmk source code
+        log "Update the build environment (west update)..."
         west update  # Update the zmk build environment (including zephyr)
     fi
     pushd ./app
@@ -139,6 +138,10 @@ fi
 # Now re-run this script inside the devcontainer to run the build...
 log "Running build inside the '$ZMKDIR' devcontainer..."
 pushd "$ZMKDIR" || (warn "Error: '$ZMKDIR' directory not found. Run '$0 -i' to install." && exit 1)
+if [ "$update" = "yes" ]; then
+    log "Update zmk source code..."
+    git pull  # Update the zmk source code
+fi
 # Start the devcontainer (id is empty if the container is already running)
 id=$(devcontainer up | sed -n 's/^.*Start: Run: docker start \([0-9a-f]*\).*$/\1/p')
 devcontainer exec "$MYCONFIG/build.sh" $@
