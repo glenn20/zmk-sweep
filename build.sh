@@ -69,6 +69,7 @@ if [ -d "$WORKSPACE" ]; then
     if [ "$update" = "yes" ]; then
         log "Update the build environment (west update)..."
         west update  # Update the zmk build environment (including zephyr)
+        exit 0
     fi
     pushd ./app
     for shield in $SHIELDS; do
@@ -148,6 +149,10 @@ devcontainer exec "$MYCONFIG/build.sh" $@
 if [ -n "$id" ]; then
     docker stop $id > /dev/null  # Stop the container if we started it
 fi
+if [ "$update" = "yes" ]; then
+    log "Git and West update complete."
+    exit 0
+fi
 popd
 
 [ ! -d "$FIRMWARE" ] && mkdir -p "$FIRMWARE"
@@ -157,6 +162,47 @@ for shield in $SHIELDS; do
 done
 ls -lR "$FIRMWARE"
 
+
+# Function to flash the correct firmware file to a device
+flash_device() {
+    serial=$1  # The usb serial number of the device
+    device=$(readlink -e "/dev/disk/by-id/usb-$serial" || true)
+    if [ -z "$device" ]; then
+        return 1  # Device is not connected
+    fi
+    # Check if the device is mounted
+    mount=$(findmnt -n -o TARGET --source $device 2>/dev/null || true)
+    if [ -z "$mount" ]; then
+        return 1
+    fi
+    # $devices is a map from serial number to firmware filename
+    filename=${devices[$serial]}
+    if [ ! -f "$FIRMWARE/$filename" ]; then
+        warn "Error: $FIRMWARE/$filename not found." && exit 1
+    fi
+    echo
+    # Copy new firmware to the device
+    log "Flashing $FIRMWARE/$filename..."
+    cp -v $FIRMWARE/$filename $mount/$filename
+    log "Firmware flashed successfully."
+}
+
+flash_device_wait() {
+    for i in {20..0}; do  # Wait up to 20 seconds for the devices to be mounted
+        for j in {5..1}; do  # Check every 0.2 seconds for the devices
+            for serial in "${!devices[@]}"; do  # Check each device in the devices list
+                # Check if the device is connected
+                if flash_device "$serial"; then
+                    return 0
+                fi
+            done
+            sleep 0.2
+        done
+        echo -n "${i}..."
+    done
+    return 1  # No devices found
+}
+
 if [ "$flash" = "yes" ]; then
     # Flash the firmware to the devices
     if [ -z "${!devices[*]}" ]; then
@@ -164,32 +210,7 @@ if [ "$flash" = "yes" ]; then
     fi
     log "Searching for devices to flash firmware..."
     # Search for mounted usb devices which match those in the $devices array
-    for i in {20..0}; do
-        for j in {5..1}; do
-            for serial in "${!devices[@]}"; do  # loop over all the keys in the array
-                # Check if the device is connected
-                device=$(readlink -e "/dev/disk/by-id/usb-$serial" || true)
-                if [ -n "$device" ]; then
-                    # Check if the device is mounted
-                    mount=$(findmnt -n -o TARGET --source $device 2>/dev/null || true)
-                    if [ -n "$mount" ]; then
-                        uf2=${devices[$serial]}
-                        if [ ! -f "$FIRMWARE/$uf2" ]; then
-                            warn "Error: $FIRMWARE/$uf2 not found." && exit 1
-                        fi
-                        echo
-                        # Copy new firmware to the device
-                        log "Flashing $FIRMWARE/$uf2..."
-                        cp -v $FIRMWARE/$uf2 $mount/$uf2
-                        log "Firmware flashed successfully."
-                        exit 0
-                    fi
-                fi
-            done
-            sleep 0.2
-        done
-        echo -n "${i}..."
-    done
-    echo
-    warn "Timed out waiting for devices to flash firmware." && exit 1
+    if flash_device_wait; then
+        warn "Timeout waiting for devices to flash firmware." && exit 1
+    fi
 fi
