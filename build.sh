@@ -49,17 +49,18 @@ Usage() {
 }
 options="$@"
 isopt() { [[ "$options" =~ $1 ]] && echo yes || echo no; }
-clean=$(isopt -c)
-install=$(isopt -i)
-update=$(isopt -u)
-flash=$(isopt -f)
-[[ $(isopt -[^cuif]) == "yes" ]] && Usage
+[[ $(isopt -[^ciuf]) == "yes" ]] && Usage
+clean=$(isopt -c)       # Clean the build directory before building
+install=$(isopt -i)     # Install zmk and the build environment
+update=$(isopt -u)      # Update zmk and the build environment
+flash=$(isopt -f)       # Flash the firmware to the devices
+build=yes               # Build/compile the firmware
 
 log() { echo -e "\033[0;32m### $@\033[0m"; }
 warn() { echo -e "\033[0;31m### $@\033[0m" 1>&2; }
 
 if [ -d "$WORKSPACE" ]; then
-    # We are running inside the container: build the firmware
+    # This part of the script is run inside the devcontainer
     cd "$WORKSPACE"
     if [ "$install" = "yes" ]; then
         log "Install zmk build environment (west init)..."
@@ -69,32 +70,69 @@ if [ -d "$WORKSPACE" ]; then
     if [ "$update" = "yes" ]; then
         log "Update the build environment (west update)..."
         west update  # Update the zmk build environment (including zephyr)
-        exit 0
     fi
-    pushd ./app
-    for shield in $SHIELDS; do
-        if [ -d build/$shield -a "$clean" != "yes" -a "$update" != "yes" ]; then
-            # Perform a build without cleaning
-            log "Building ${shield}_${MCU}..."
-            west build -d build/$shield
-        else
-            # Perform a full build from clean
-            log "Building ${shield}_${MCU}..."
-            west build -d build/$shield -p -b $MCU -- -DSHIELD=$shield -DZMK_CONFIG=$MYCONFIG/config
-        fi
-    done
-    popd
+    if [ "$build" == "yes" ]; then
+        # Build the firmware for the specified MCU and shields
+        pushd ./app
+        for shield in $SHIELDS; do
+            if [ -d build/$shield -a "$clean" != "yes" ]; then
+                # Perform a build without cleaning
+                log "Building ${shield}_${MCU}..."
+                west build -d build/$shield
+            else
+                # Perform a full build from clean
+                log "Building ${shield}_${MCU}..."
+                west build -d build/$shield -p -b $MCU -- -DSHIELD=$shield -DZMK_CONFIG=$MYCONFIG/config
+            fi
+        done
+        popd
+    fi
     chown -R $(stat -c %u:%g .) .west app/build  # Set ownership of build files
-    exit 0
+    exit 0  # Return to the script running on the host computer
 fi
 
-# We are running outside the container - send the build command to the container
+# The rest of the script is run on the host computer, outside the container
+
+# Check that the zmk-config directory exists
 if [ ! -d "$CONFIGDIR/config" ]; then
     warn "Error: '$CONFIGDIR/config' directory not found." 1>&2
     log "Run '$0' in your zmk config base directory." 1>&2
     log "See https://zmk.dev/docs/user-setup to create a new config." 1>&2
     exit 1
 fi
+
+# Create the zmk-config docker volume (delete first if it already exists)
+create_docker_volume() {
+    volume=$1
+    directory=$2
+    # Check if the docker volume already exists
+    if docker volume inspect "$volume" > /dev/null 2>&1; then
+        # Remove the existing docker volume
+        log "Deleting existing '$volume' docker volume..."
+        id=$(  # Try deleting the volume - get the container id if in use
+            docker volume rm "$volume" 2>&1 | \
+            sed -n 's/^Error.*: volume is in use - \[\([0-9a-f]*\)\]$/\1/p'
+        )
+        if [ -n "$id" ]; then
+            log "Stopping and removing container using '$volume' docker volume..."
+            docker stop $id > /dev/null || /bin/true # Stop the container using the volume
+            docker rm $id > /dev/null   # Remove the container using the volume
+            docker volume rm "$volume" > /dev/null
+        fi
+    fi
+    log "Creating '$volume' docker volume bound to '$directory'..."
+    docker volume create --driver local -o o=bind -o type=none -o device="$directory" "$volume"
+}
+
+# Run the script inside the devcontainer
+run_devcontainer() {
+    # Start the devcontainer (id is empty if the container is already running)
+    id=$(devcontainer up | sed -n 's/^.*Start: Run: docker start \([0-9a-f]*\).*$/\1/p')
+    devcontainer exec $@
+    if [ -n "$id" ]; then
+        docker stop $id > /dev/null  # Stop the container if we started it
+    fi
+}
 
 cd $CONFIGDIR
 if [ "$install" = "yes" ]; then
@@ -111,48 +149,25 @@ if [ "$install" = "yes" ]; then
     log "git clone '$ZMKREPO' '$ZMKDIR'"
     git clone "$ZMKREPO" "$ZMKDIR"
 
-    # Setup the zmk-config docker volume
-    if docker volume inspect "$VOLUME" > /dev/null 2>&1; then
-        # Remove the existing docker volume
-        log "Deleting existing '$VOLUME' docker volume..."
-        id=$(  # Try deleting the volume - get the container id if in use
-            docker volume rm "$VOLUME" 2>&1 | \
-            sed -n 's/^Error.*: volume is in use - \[\([0-9a-f]*\)\]$/\1/p'
-        )
-        if [ -n "$id" ]; then
-            log "Stopping and removing container using '$VOLUME' docker volume..."
-            docker stop $id > /dev/null || /bin/true # Stop the container using the volume
-            docker rm $id > /dev/null   # Remove the container using the volume
-            docker volume rm "$VOLUME" > /dev/null
-        fi
-    fi
-    log "Creating '$VOLUME' docker volume bound to '$CONFIGDIR'..."
-    docker volume create --driver local -o o=bind -o type=none -o device="$CONFIGDIR" "$VOLUME"
+    # Create the zmk-config docker volume (will delete first if it already exists)
+    create_docker_volume $VOLUME $CONFIGDIR
 
-    # Build the devcontainer
+    # Build the vscode devcontainer
     log "Building the zmk devcontainer..."
     pushd "$ZMKDIR"
     devcontainer build || ( log "Install failed."; exit 1 )
     popd
 fi
 
-# Now re-run this script inside the devcontainer to run the build...
-log "Running build inside the '$ZMKDIR' devcontainer..."
 pushd "$ZMKDIR" || (warn "Error: '$ZMKDIR' directory not found. Run '$0 -i' to install." && exit 1)
 if [ "$update" = "yes" ]; then
     log "Update zmk source code..."
     git pull  # Update the zmk source code
 fi
-# Start the devcontainer (id is empty if the container is already running)
-id=$(devcontainer up | sed -n 's/^.*Start: Run: docker start \([0-9a-f]*\).*$/\1/p')
-devcontainer exec "$MYCONFIG/build.sh" $@
-if [ -n "$id" ]; then
-    docker stop $id > /dev/null  # Stop the container if we started it
-fi
-if [ "$update" = "yes" ]; then
-    log "Git and West update complete."
-    exit 0
-fi
+
+# Now re-run this script inside the devcontainer to install/update/build
+log "Running build inside the '$ZMKDIR' devcontainer..."
+run_devcontainer "$MYCONFIG/build.sh" $@
 popd
 
 [ ! -d "$FIRMWARE" ] && mkdir -p "$FIRMWARE"
@@ -162,8 +177,7 @@ for shield in $SHIELDS; do
 done
 ls -lR "$FIRMWARE"
 
-
-# Function to flash the correct firmware file to a device
+# Flash the correct firmware to a device identified by usb serial number
 flash_device() {
     serial=$1  # The usb serial number of the device
     device=$(readlink -e "/dev/disk/by-id/usb-$serial" || true)
@@ -189,9 +203,9 @@ flash_device() {
 
 flash_device_wait() {
     for i in {20..0}; do  # Wait up to 20 seconds for the devices to be mounted
-        for j in {5..1}; do  # Check every 0.2 seconds for the devices
+        for j in {5..1}; do  # Check for devices every 0.2 seconds
             for serial in "${!devices[@]}"; do  # Check each device in the devices list
-                # Check if the device is connected
+                # Flash firmware to any device that is connected and mounted
                 if flash_device "$serial"; then
                     return 0
                 fi
