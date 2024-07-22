@@ -20,29 +20,27 @@
 
 - Keypress:
   - `ENTER` and `TAB` on left thumb keys
-  - `SPACE` and `BSPC` on right thumb keys (my prior usage was right thumb for
-    space bar)
-- On hold:
+  - `SPACE` and `BSPC` on right thumb keys
+    - my muscle memory was right thumb for space bar
+- While held:
   - `SYM` (blue) and `NAV` (red) layers on left thumbs (`SETTINGS` layer on
     combo)
   - `SHIFT` and `NUM` (green) layer on right thumbs (`FUN` layer on combo)
-    - originally had `SYM` on right thumb with `SPACE`, but too complex when
-      typing symbols surrounded by spaces (eg. code dev)
-      - moved `SYM` to left and `NAV` to second left thumb key.
-    - Chose to make right thumb key a shift key (I like this much better)
-      - pushed the `FUN` layer onto a combo of right thumbs.
+    - `SHIFT+TAB` thumb keys will generate `&caps_word`
 - `TAB`, `ENTER`, `SPACE`, `BSPC` are on hold-taps, so won't repeat when held:
   - Repeating (non-modifier) versions of each key are on other layers
     - so `SYM`|`NAV`->`SPACE`|`BSPC` and `NUM`->`TAB`|`ENTER` will produce
       repeating keys when held.
   - Also use `quick-tap-ms=225` for repeat on fast click then hold
 - `ENTER`+`SPACE` as combo key is convenient shortcut to `ESC` key
-- On SETTINGS layer:
-  - `NUM` key locks the `NUM` layer on
-  - `SPC` key returns to BASE layer
-- On FUN layer:
-  - `NAV` key locks the `NAV` layer on
-  - `SYM` key returns to BASE layer
+- To lock the `NUM` layer:
+  - Hold both left thumb keys (`ENTER`+`TAB`) before pressing `NUM` key on the
+    right thumb :
+    - `SPC` key returns to `BASE` layer
+- To lock the `NAV` layer:
+  - Hold both right thumb keys (`SPACE`+`BSPC`) before pressing `NAV` key on the
+    left thumb :
+    - `ENTER` key returns to `BASE` layer
 
 #### BASE layer
 
@@ -76,8 +74,8 @@
 #### NAV layer
 
 - `NAV` layer key and main `NAV` keys on left side:
-  - `LEFT-WORD PGUP PGDN RIGHT-WORD HOME`
-  - `LEFT UP DOWN RIGHT END`
+  - `HOME LEFT-WORD RIGHT-WORD END PGUP`
+  - `LEFT UP DOWN RIGHT PGDN`
   - `UNDO CUT COPY PASTE REDO`
 - Easy to use along with mouse on right hand
 - Experimented with a lot of layouts for navigation keys
@@ -93,7 +91,7 @@
 - Num-pad like arrangement on left hand
   - `/ 7 8 9 -` --- `UNDO CUT COPY PASTE REDO`
   - `* 4 5 6 +` --- `DEL SFT CTL ALT GUI`
-  - `0 1 2 3 .` --- `BSPC _ , SPC ESC`
+  - `0 1 2 3 .` --- `BSPC _ , . ESC`
     - `TAB ENTER` - `SPC BSPC`
   - includes `*`, `/`, `+`, `-` keys
 - Right side includes `_` and `,` for typing numbers
@@ -119,6 +117,7 @@
   - `BLE bt4 --- --- RESET` --- `RESET CTL-ALT-(LEFT DOWN UP RIGHT)`
   - `bt0 bt1 bt2 bt3 FLASH` --- `FLASH GUI-(LEFT DOWN UP RIGHT)`
     - `--- ---` - `BASE NUM`
+  - Bluetooth profile numbers on corresponding number layer keys
 - Desktop navigation keys on right hand (and **reset**, **reflash**):
   - top row: move window to desktop
   - middle row: switch to desktop

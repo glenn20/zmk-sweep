@@ -62,33 +62,38 @@
             tapping-term-ms = <280>;
             quick-tap-ms = <200>;
         };
+        NAV_TAB_capsword: NAV_TAB_capsword {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&lt NAV TAB>, <&caps_word>; // SHIFT+TAB is caps_word
+            mods = <(MOD_LSFT)>;
+        };
     };
     combos {
         compatible = "zmk,combos";
         // Both left keys - SETTINGS layer
         combo_left_thumb {
-            timeout-ms = <500>;
             key-positions = <30 31>;
             bindings = <&mo SETTINGS>;
+            timeout-ms = <500>;
         };
         // Both right keys - FUN layer
         combo_right_thumb {
-            timeout-ms = <500>;
             key-positions = <32 33>;
             bindings = <&mo FUN>;
+            timeout-ms = <500>;
         };
         // Both inner thumb keys - ESC key
         combo_thumb_esc {
-            timeout-ms = <500>;
             key-positions = <31 32>;
             bindings = <&kp ESC>;
+            timeout-ms = <500>;
         };
-        // Z and X make caps_word
-        combo_zx_capsword {
-            timeout-ms = <300>;
-            key-positions = <20 21>;
-            layers = <BASE>;
-            bindings = <&caps_word>;
+        // Both outer thumb keys - return to BASE layer
+        combo_thumb_base_layer {
+            key-positions = <30 33>;
+            bindings = <&to BASE>;
+            timeout-ms = <500>;
         };
     };
 
@@ -100,7 +105,7 @@
             &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
             HL( A,          S,          D,          F)      &kp G           &kp H        HR(J,          K,          L,          SEMI)
             &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH
-                                        &lt NAV TAB &lt SYM ENTER           &mt LSHIFT SPACE &lt NUM BSPC
+                                  &NAV_TAB_capsword &lt SYM ENTER           &mt LSHIFT SPACE &lt NUM BSPC
             >;
         };
         sym_layer { // Symbols
@@ -113,9 +118,9 @@
         };
         nav_layer { // Navigation
             bindings = <
-            &kp LC(LEFT)&kp PG_UP   &kp PG_DN   &kp LC(RIGHT)&kp HOME       &kp LC(D)   &kp LC(LBKT)&kp LA(DOWN)&kp LA(UP)  &kp LC(RBKT)
-            &kp LEFT    &kp UP      &kp DOWN    &kp RIGHT   &kp END         &kp DEL     &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
-            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp LC(BSPC)&kp LC(DEL) &kp ENTER   &caps_word  &kp ESC
+            &kp HOME    &kp LC(LEFT)&kp LC(RIGHT)&kp END    &kp PG_UP       &kp LC(D)   &kp LC(LBKT)&kp LA(DOWN)&kp LA(UP)  &kp LC(RBKT)
+            &kp LEFT    &kp UP      &kp DOWN    &kp RIGHT   &kp PG_DN       &kp DEL     &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
+            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp LC(BSPC)&kp LC(DEL) &kp ENTER   &kp DOT     &kp ESC
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
@@ -123,7 +128,7 @@
             bindings = <
             &kp FSLH    &kp N7      &kp N8      &kp N9      &kp MINUS       &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)
             &kp ASTRK   &kp N4      &kp N5      &kp N6      &kp PLUS        &kp DEL     &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
-            &kp N0      &kp N1      &kp N2      &kp N3      &kp DOT         &kp BSPC    &kp UNDER   &kp COMMA   &kp DOT   &kp ESC
+            &kp N0      &kp N1      &kp N2      &kp N3      &kp DOT         &kp BSPC    &kp UNDER   &kp COMMA   &kp DOT     &kp ESC
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
