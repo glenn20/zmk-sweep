@@ -199,6 +199,7 @@ flash_device() {
     log "Flashing $FIRMWARE/$filename..."
     cp -v $FIRMWARE/$filename $mount/$filename
     log "Firmware flashed successfully."
+    return 0
 }
 
 flash_device_wait() {
@@ -224,7 +225,7 @@ if [ "$flash" = "yes" ]; then
     fi
     log "Searching for devices to flash firmware..."
     # Search for mounted usb devices which match those in the $devices array
-    if flash_device_wait; then
+    if ! flash_device_wait; then
         warn "Timeout waiting for devices to flash firmware." && exit 1
     fi
 fi
