@@ -120,7 +120,7 @@
             bindings = <
             &kp HOME    &kp LC(LEFT)&kp LC(RIGHT)&kp END    &kp PG_UP       &kp LC(D)   &kp LC(LBKT)&kp LA(DOWN)&kp LA(UP)  &kp LC(RBKT)
             &kp LEFT    &kp UP      &kp DOWN    &kp RIGHT   &kp PG_DN       &kp DEL     &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
-            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp LC(BSPC)&kp LC(DEL) &kp ENTER   &kp DOT     &kp ESC
+            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp LC(BSPC)&kp LC(DEL) &kp LA(LC(MINUS))&kp LS(LC(MINUS))&kp ESC
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
