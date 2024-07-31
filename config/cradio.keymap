@@ -62,11 +62,23 @@
             tapping-term-ms = <280>;
             quick-tap-ms = <200>;
         };
-        NAV_TAB_capsword: NAV_TAB_capsword {
+        NAV_TAB_capsword: NAV_TAB_capsword { // SHIFT+TAB is caps_word
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&lt NAV TAB>, <&caps_word>; // SHIFT+TAB is caps_word
+            bindings = <&lt NAV TAB>, <&caps_word>;
             mods = <(MOD_LSFT)>;
+        };
+        right_: right_ { // ALT+RIGHTARROW is indent (ctrl-])
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp LC(RIGHT)>, <&kp LC(RBKT)>;
+            mods = <(MOD_LALT)>;
+        };
+        left_: left_ { // ALT+LEFTARROW is dedent (ctrl-[)
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LEFT)>, <&kp LC(LBKT)>;
+            mods = <(MOD_LALT)>;
         };
     };
     combos {
@@ -116,11 +128,19 @@
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp DEL
             >;
         };
-        nav_layer { // Navigation
+        // nav_layer { // Navigation LEFT_T
+        //     bindings = <
+        //     &kp HOME    &kp LC(LEFT)&kp UP      &kp LC(RIGHT)&kp PG_UP      &kp LC(D)   &kp LC(LBKT)&kp LA(DOWN)&kp LA(UP)  &kp LC(RBKT)
+        //     &kp END     &kp LEFT    &kp DOWN    &kp RIGHT   &kp PG_DN       &kp DEL     &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
+        //     &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp LC(BSPC)&kp LC(DEL) &kp LA(LC(MINUS))&kp LS(LC(MINUS))&kp ESC
+        //                                         &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
+        //     >;
+        // };
+        nav_layer { // Navigation RIGHT_T
             bindings = <
-            &kp HOME    &kp LC(LEFT)&kp LC(RIGHT)&kp END    &kp PG_UP       &kp LC(D)   &kp LC(LBKT)&kp LA(DOWN)&kp LA(UP)  &kp LC(RBKT)
-            &kp LEFT    &kp UP      &kp DOWN    &kp RIGHT   &kp PG_DN       &kp DEL     &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
-            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp LC(BSPC)&kp LC(DEL) &kp LA(LC(MINUS))&kp LS(LC(MINUS))&kp ESC
+            &kp LC(LBKT)&kp LA(UP)  &kp LA(DOWN)&kp LC(RBKT)&kp LC(D)       &kp LA(LC(MINUS))&kp LC(BSPC)&kp DEL &kp LC(DEL) &kp LS(LC(MINUS))
+            &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &kp DEL         &kp PG_UP   &left_      &kp UP      &right_     &kp HOME
+            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp PG_DN   &kp LEFT    &kp DOWN    &kp RIGHT   &kp END
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
