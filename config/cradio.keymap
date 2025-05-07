@@ -71,13 +71,13 @@
         right_: right_ { // ALT+RIGHTARROW is indent (ctrl-])
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp LC(RIGHT)>, <&kp LC(RBKT)>;
+            bindings = <&kp RIGHT>, <&kp LC(RBKT)>;
             mods = <(MOD_LALT)>;
         };
         left_: left_ { // ALT+LEFTARROW is dedent (ctrl-[)
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp LC(LEFT)>, <&kp LC(LBKT)>;
+            bindings = <&kp LEFT>, <&kp LC(LBKT)>;
             mods = <(MOD_LALT)>;
         };
     };
