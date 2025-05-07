@@ -9,6 +9,11 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 600
+#define ZMK_POINTING_SCRL_MOVE_VAL 10
+#include <dt-bindings/zmk/pointing.h>
+
+
 // Layer definitions
 #define BASE 0      // Base alphanumeric layer
 #define SYM 1       // A layer for all the symbol keys
@@ -164,10 +169,10 @@
         };
         settings_layer { // Used to change the keyboard's settings.
             bindings = <
-            &out OUT_USB &none        &none        &none        &bt BT_CLR     &none       &kp LS(LC(LA(LEFT))) &kp LS(LC(LA(DOWN))) &kp LS(LC(LA(UP))) &kp LS(LC(LA(RIGHT)))
-            &out OUT_BLE &bt BT_SEL 4 &none        &none        &sys_reset     &sys_reset  &kp LC(LA(LEFT)) &kp LC(LA(DOWN)) &kp LC(LA(UP)) &kp LC(LA(RIGHT))
-            &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bootloader    &bootloader &kp LG(LEFT) &kp LG(DOWN) &kp LG(UP) &kp LG(RIGHT)
-                                                   &none        &none          &to BASE    &to NUM
+            &out OUT_USB &out OUT_BLE &bt BT_SEL 4 &none        &bt BT_CLR      &none       &mkp LCLK      &mkp MCLK      &mkp RCLK &none
+            &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &sys_reset      &sys_reset  &mmv MOVE_LEFT &mmv MOVE_UP   &mmv MOVE_RIGHT &none
+            &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bootloader     &bootloader &mkp MB4       &mmv MOVE_DOWN &mkp MB5 &none
+                                                   &none        &none           &to BASE    &to NUM
             >;
         };
     };
