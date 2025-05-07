@@ -145,7 +145,7 @@
         };
         nav_layer { // Navigation RIGHT_T
             bindings = <
-            &kp ESC     &kp LA(UP)  &kp LA(DOWN)&kp LC(RBKT)&kp LC(D)       &kp LC(D)   &kp LC(BSPC)&kp BSPC    &kp DEL     &kp LC(DEL)
+            &kp ESC     &none       &none       &none       &none           &kp LC(D)   &kp LC(BSPC)&kp BSPC    &kp DEL     &kp LC(DEL)
             &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &kp DEL         &kp PG_UP   &left_      &kp UP      &right_     &kp HOME
             &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp PG_DN   &kp NAVPREV &kp DOWN    &kp NAVNEXT &kp END
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
