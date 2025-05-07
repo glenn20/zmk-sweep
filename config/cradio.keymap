@@ -118,6 +118,10 @@
     keymap {
         compatible = "zmk,keymap";
 
+        // For going to prev/next navigation position in vscode and other apps.
+        #define NAVPREV LA(LC(MINUS))
+        #define NAVNEXT LS(LC(MINUS))
+
         default_layer { // Base alpha layer
             bindings = <
             &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
@@ -134,19 +138,11 @@
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp DEL
             >;
         };
-        // nav_layer { // Navigation LEFT_T
-        //     bindings = <
-        //     &kp HOME    &kp LC(LEFT)&kp UP      &kp LC(RIGHT)&kp PG_UP      &kp LC(D)   &kp LC(LBKT)&kp LA(DOWN)&kp LA(UP)  &kp LC(RBKT)
-        //     &kp END     &kp LEFT    &kp DOWN    &kp RIGHT   &kp PG_DN       &kp DEL     &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
-        //     &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp LC(BSPC)&kp LC(DEL) &kp LA(LC(MINUS))&kp LS(LC(MINUS))&kp ESC
-        //                                         &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
-        //     >;
-        // };
         nav_layer { // Navigation RIGHT_T
             bindings = <
-            &kp LC(LBKT)&kp LA(UP)  &kp LA(DOWN)&kp LC(RBKT)&kp LC(D)       &kp LA(LC(MINUS))&kp LC(BSPC)&kp DEL &kp LC(DEL) &kp LS(LC(MINUS))
+            &kp ESC     &kp LA(UP)  &kp LA(DOWN)&kp LC(RBKT)&kp LC(D)       &kp LC(D)   &kp LC(BSPC)&kp BSPC    &kp DEL     &kp LC(DEL)
             &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &kp DEL         &kp PG_UP   &left_      &kp UP      &right_     &kp HOME
-            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp PG_DN   &kp LEFT    &kp DOWN    &kp RIGHT   &kp END
+            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp PG_DN   &kp NAVPREV &kp DOWN    &kp NAVNEXT &kp END
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
             >;
         };
