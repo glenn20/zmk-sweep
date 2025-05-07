@@ -95,16 +95,22 @@
             bindings = <&mo FUN>;
             timeout-ms = <500>;
         };
-        // Both inner thumb keys - ESC key
-        combo_thumb_esc {
-            key-positions = <31 32>;
+        // Combine Q+W keys for - ESC
+        combo_qw_esc {
             bindings = <&kp ESC>;
+            key-positions = <0 1>;
+            timeout-ms = <50>;
+        };
+        // Both inner thumb keys - ESC
+        combo_thumb_esc {
+            bindings = <&kp ESC>;
+            key-positions = <31 32>;
             timeout-ms = <500>;
         };
         // Both outer thumb keys - return to BASE layer
         combo_thumb_base_layer {
-            key-positions = <30 33>;
             bindings = <&to BASE>;
+            key-positions = <30 33>;
             timeout-ms = <500>;
         };
     };
