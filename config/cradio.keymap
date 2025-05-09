@@ -137,12 +137,20 @@
         };
         sym_layer { // Symbols
             bindings = <
-            &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT       &kp CARET   &kp AMPS    &kp ASTRK   &kp QMARK   &kp ESC
-            HL( GRAVE,      LPAR,       RPAR,       LBKT)   &kp RBKT        &kp BSLH    HR( MINUS,      EQUAL,      SQT,        SEMI)
-            &kp TILDE   &kp LT      &kp GT      &kp LBRC    &kp RBRC        &kp PIPE    &kp UNDER   &kp PLUS    &kp DQT     &kp COLON
+            &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT       &kp CARET   &kp AMPS    &kp ASTRK   &kp LPAR    &kp RPAR
+            HL( GRAVE,      LT,         QMARK,      SQT)    &kp SEMI        &kp BSLH    HR( MINUS,      EQUAL,      LBKT,       RBKT)
+            &kp TILDE   &kp GT      &kp EXCL    &kp DQT     &kp COLON       &kp PIPE    &kp UNDER   &kp PLUS    &kp LBRC    &kp RBRC
                                                 &kp TAB     &kp ENTER       &kp SPACE   &kp DEL
             >;
         };
+        // sym_layer { // Symbols - Backup of previous layout.
+        //     bindings = <
+        //     &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT       &kp CARET   &kp AMPS    &kp ASTRK   &kp QMARK   &kp ESC
+        //     HL( GRAVE,      LPAR,       RPAR,       LBKT)   &kp RBKT        &kp BSLH    HR( MINUS,      EQUAL,      SQT,        SEMI)
+        //     &kp TILDE   &kp LT      &kp GT      &kp LBRC    &kp RBRC        &kp PIPE    &kp UNDER   &kp PLUS    &kp DQT     &kp COLON
+        //                                         &kp TAB     &kp ENTER       &kp SPACE   &kp DEL
+        //     >;
+        // };
         nav_layer { // Navigation RIGHT_T
             bindings = <
             &kp ESC     &kp NAVPREV &kp NAVNEXT &none       &none           &kp LC(D)   &kp LC(BSPC)&kp BSPC    &kp DEL     &kp LC(DEL)
