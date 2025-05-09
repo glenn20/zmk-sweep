@@ -173,6 +173,9 @@ build_firmware_in_devcontainer() {
     chown -R $(stat -c %u:%g .) .west app/build  # Set ownership of build files
 }
 
+# Save a copy of the built firmware files to the $FIRMWARE directory, eg:
+# - cp zmk/app/build/cradio_left/zephyr/zmk.uf2 firmware/zmk_cradio_left_nice_nano_v2.uf2
+# - cp zmk/app/build/cradio_right/zephyr/zmk.uf2 firmware/zmk_cradio_right_nice_nano_v2.uf2
 save_firmware_files() {
     [ ! -d "$FIRMWARE" ] && mkdir -p "$FIRMWARE"
     log "Saving firmware files to '$FIRMWARE'..."
@@ -186,9 +189,11 @@ save_firmware_files() {
 
 
 # Flash the correct firmware to a device identified by usb serial number
+# The device must be in bootloader mode and found at /dev/disk/by-id/usb-<serial>
+# Relies on the device being automatically mounted by the system
 flash_device() {
     serial=$1  # The usb serial number of the device
-    device=$(readlink -e "/dev/disk/by-id/usb-$serial" || true)
+    device=$(readlink -e "/dev/disk/by-id/usb-$serial" || true)  # eg. /dev/sda
     if [ -z "$device" ]; then
         return 1  # Device is not connected
     fi
@@ -197,16 +202,19 @@ flash_device() {
     if [ -z "$mount" ]; then
         return 1
     fi
-    # $devices is a map from serial number to firmware filename
+    # Find the right firmware file for this device
     filename=${devices[$serial]}
     if [ ! -f "$FIRMWARE/$filename" ]; then
         warn "Error: $FIRMWARE/$filename not found." && exit 1
     fi
     echo
-    # Copy new firmware to the device
-    log "Flashing $FIRMWARE/$filename..."
+    log "Found device $serial at $device mounted at $mount"
+    # Copy the firmware to the device
+    log "Copying $FIRMWARE/$filename to device..."
     cp -v $FIRMWARE/$filename $mount/$filename
+    # The device will automatically reboot after the new firmware is copied.
     log "Firmware flashed successfully."
+    log "Your keyboard is now automatically rebooting into your new firmware."
     return 0
 }
 
