@@ -67,6 +67,18 @@
             tapping-term-ms = <280>;
             quick-tap-ms = <200>;
         };
+        BSPC_DEL: BSPC_DEL { // SHIFT+BSPC is DEL
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp BSPC>, <&kp DEL>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        NUM_BSPC_DEL: NUM_BSPC_DEL { // NUM SHIFT+BSPC is DEL
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&lt NUM BSPC>, <&kp DEL>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
         NAV_TAB_capsword: NAV_TAB_capsword { // SHIFT+TAB is caps_word
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -132,7 +144,7 @@
             &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
             HL( A,          S,          D,          F)      &kp G           &kp H        HR(J,          K,          L,          SEMI)
             &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH
-                                  &NAV_TAB_capsword &lt SYM ENTER           &mt LSHIFT SPACE &lt NUM BSPC
+                                  &NAV_TAB_capsword &lt SYM ENTER           &mt LSHIFT SPACE &NUM_BSPC_DEL
             >;
         };
         sym_layer { // Symbols
@@ -140,7 +152,7 @@
             &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT       &kp CARET   &kp AMPS    &kp ASTRK   &kp LPAR    &kp RPAR
             HL( GRAVE,      LT,         QMARK,      SQT)    &kp SEMI        &kp BSLH    HR( MINUS,      EQUAL,      LBKT,       RBKT)
             &kp TILDE   &kp GT      &kp EXCL    &kp DQT     &kp COLON       &kp PIPE    &kp UNDER   &kp PLUS    &kp LBRC    &kp RBRC
-                                                &kp TAB     &kp ENTER       &kp SPACE   &kp DEL
+                                                &kp TAB     &kp ENTER       &kp SPACE   &BSPC_DEL
             >;
         };
         // sym_layer { // Symbols - Backup of previous layout.
@@ -156,7 +168,7 @@
             &kp ESC     &kp NAVPREV &kp NAVNEXT &none       &none           &kp LC(D)   &kp LC(BSPC)&kp BSPC    &kp DEL     &kp LC(DEL)
             &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &kp DEL         &kp PG_UP   &left_      &kp UP      &right_     &kp HOME
             &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp PG_DN   &kp LC(LEFT)&kp DOWN    &kp LC(RIGHT)&kp END
-                                                &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
+                                                &kp TAB     &kp ENTER       &kp SPACE   &BSPC_DEL
             >;
         };
         num_layer { // Numbers
@@ -164,7 +176,7 @@
             &kp FSLH    &kp N7      &kp N8      &kp N9      &kp MINUS       &kp LC(D)   &kp LC(BSPC)&kp BSPC    &kp DEL     &kp LC(DEL)
             &kp ASTRK   &kp N4      &kp N5      &kp N6      &kp PLUS        &none       &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
             &kp N0      &kp N1      &kp N2      &kp N3      &kp DOT         &none       &kp UNDER   &kp COMMA   &kp DOT     &kp ESC
-                                                &kp TAB     &kp ENTER       &kp SPACE   &kp BSPC
+                                                &kp TAB     &kp ENTER       &kp SPACE   &BSPC_DEL
             >;
         };
         fun_layer { // Function keys and media
@@ -172,7 +184,7 @@
             &kp F12     &kp F7      &kp F8      &kp F9      &kp PSCRN       &kp C_SLEEP &kp C_VOL_DN &kp C_MUTE  &kp C_VOL_UP &kp C_PWR
             &kp F11     &kp F4      &kp F5      &kp F6      &none           &none       &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
             &kp F10     &kp F1      &kp F2      &kp F3      &none           &none       &none       &none       &none       &none
-                                                &to NAV     &to BASE        &kp SPACE   &kp BSPC
+                                                &to NAV     &to BASE        &kp SPACE   &BSPC_DEL
             >;
         };
         settings_layer { // Used to change the keyboard's settings and mouse control.
