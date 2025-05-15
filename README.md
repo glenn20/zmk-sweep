@@ -26,13 +26,13 @@
   - `SYM` (blue) and `NAV` (red) layers on left thumbs (`SETTINGS` layer on
     combo)
   - `SHIFT` and `NUM` (green) layer on right thumbs (`FUN` layer on combo)
-    - `SHIFT+TAB` thumb keys will generate `&caps_word`
+    - `SHIFT+ENTER` will generate `ESC` key
+    - `SHIFT+BSPC` will generate `DEL` key
 - `TAB`, `ENTER`, `SPACE`, `BSPC` are on hold-taps, so won't repeat when held:
   - Repeating (non-modifier) versions of each key are on other layers
     - so `SYM`|`NAV`->`SPACE`|`BSPC` and `NUM`->`TAB`|`ENTER` will produce
       repeating keys when held.
   - Also use `quick-tap-ms=225` for repeat on fast click then hold
-- `ENTER`+`SPACE` as combo key is convenient shortcut to `ESC` key
 - To lock the `NUM` layer:
   - Hold both left thumb keys (`ENTER`+`TAB`) before pressing `NUM` key on the
     right thumb :
@@ -54,49 +54,33 @@
 #### SYM layer
 
 - Put all symbol keys on a single layer - with a layout that makes sense to me
-  - ``! @ # $ %`` --- `^ & * ? ESC`
-  - `` ` ( ) [ ]`` --- `\ - = ' ;`
-  - ``~ < > { }`` --- `| _ + " :`
-    - `TAB ENTER` - `SPC DEL`
+  - ``! @ # $ %`` --- `^ & * ( )`
+  - `` ` < ? ' ;`` --- `\ - = [ ]`
+  - ``~ < ! " :`` --- `| _ + { }`
+    - `TAB ENTER` - `SPC BSPC`
   - all symbols can be accessed from this one layer without additional modifier
     - except `.` and `,` which are on BASE layer
   - symbols from the shifted number keys on a qwerty keyboard along the top row
-    (except brackets)
-- Left hand:
-  - `` ` `` and `~` on the left and parenthesis/bracket/brace pairs
-- Right hand:
-  - `\ - = ' ;` on middle row with _shifted_ variants on bottom row `| _ + " :`
-- Thumbs:
-  - `DEL` on outer right thumb key
-  - `ESC` on inner left+right thumb combo key, yet still a SPC key if pressed
-    after a first symbol key, ie. `$` `SPC` `%` produces `$ %`
 
 #### NAV layer
 
-- `NAV` layer key and main `NAV` keys on left side:
-  - `HOME LEFT-WORD RIGHT-WORD END PGUP`
-  - `LEFT UP DOWN RIGHT PGDN`
-  - `UNDO CUT COPY PASTE REDO`
-- Easy to use along with mouse on right hand
+- `NAV` layer key on left and main `NAV` keys on right side:
+  - `WORD BSPC-WORD BSPC  DEL  DEL-WORD`
+  - `PGUP   LEFT     UP  RIGHT  HOME`
+  - `PGDN   LWORD   DOWN RWORD  END`
 - Experimented with a lot of layouts for navigation keys
-  - initially on right side but works better on left (I am a lefty)
-  - initially used arrow keys in _inverted-T_ on SDFC keys
-    - liked this, but its more flexible to have all arrows on same row
-  - arrow keys on home row which provide logical pairs with top row keys
+  - uses arrow keys in _inverted-T_ on JKL, keys
 - Right hand includes `DEL`, `DEL-WORD` and `BSPC-WORD`
-- Line movement keys on top right hand row: dedent, line-down, line-up, indent
 
 #### NUM layer
 
 - Num-pad like arrangement on left hand
-  - `/ 7 8 9 -` --- `UNDO CUT COPY PASTE REDO`
-  - `* 4 5 6 +` --- `DEL SFT CTL ALT GUI`
-  - `0 1 2 3 .` --- `BSPC _ , . ESC`
+  - `/ 7 8 9 -` --- `WORD BSPC-WORD BSPC  DEL  DEL-WORD`
+  - `* 4 5 6 +` --- `---- SFT CTL ALT GUI`
+  - `0 1 2 3 .` --- `---- _ , . ESC`
     - `TAB ENTER` - `SPC BSPC`
   - includes `*`, `/`, `+`, `-` keys
 - Right side includes `_` and `,` for typing numbers
-  - `UNDO`, `CUT`, `COPY`, `PASTE`, `REDO` on top row and `BSPC`, `DEL` on inner
-    column
 - NUM lock layer using `NAV+SYM+NUM`
 
 #### FUN layer (Function keys)
@@ -104,7 +88,7 @@
 - `F1-F9` function keys on number key locations
 - `F10-F12` on left little finger column.
   - `f12 f7 f8 f9 PRNT` --- `SLEEP VOL- MUTE VOL+ POWER`
-  - `f11 f4 f5 f6 ----` --- `---- SFT CTL ALT GUI`
+  - `f11 f4 f5 f6 INSERT` ---- SFT CTL ALT GUI`
   - `f10 f1 f2 f3 ----` --- `---- --- --- --- ---`
     - `NAV BASE` - `SPC BSPC`
 - includes media volume and pc power control keys on right side
@@ -113,15 +97,14 @@
 
 - includes **bluetooth**, **reset**, **reflash** and **output** control on left
   hand
-  - `USB --- --- --- BTCLR` --- `----- SFT-CTL-ALT-(LEFT DOWN UP RIGHT)`
-  - `BLE bt4 --- --- RESET` --- `RESET CTL-ALT-(LEFT DOWN UP RIGHT)`
-  - `bt0 bt1 bt2 bt3 FLASH` --- `FLASH GUI-(LEFT DOWN UP RIGHT)`
+  - `USB BLE bt4 --- BTCLR` --- `----- Left-CLK Mid-CLK Right-CLK ----`
+  - `--- --- --- --- RESET` --- `RESET M-LEFT M-UP M-RIGHT SCRL-UP`
+  - `bt0 bt1 bt2 bt3 FLASH` --- `FLASH BACK  M-DOWN FORWD SCRL-DN`
     - `--- ---` - `BASE NUM`
   - Bluetooth profile numbers on corresponding number layer keys
-- Desktop navigation keys on right hand (and **reset**, **reflash**):
-  - top row: move window to desktop
-  - middle row: switch to desktop
-  - bottom row: move window to side of this desktop
+- Mouse navigation keys on right hand (and **reset**, **reflash**):
+  - top row: mouse button clicks
+  - middle row: move mouse up/down/left/right
 
 #### Modifiers
 
