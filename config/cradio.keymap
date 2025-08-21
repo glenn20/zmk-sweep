@@ -151,11 +151,11 @@
                                                 &kp TAB     &kp ENTER       &kp SPACE   &BSPC_DEL
             >;
         };
-        nav_layer { // Navigation RIGHT_T
+        nav_layer { // Navigation RIGHT_HJKL
             bindings = <
             &kp ESC     &kp NAVPREV &kp NAVNEXT &none       &none           &kp LC(D)   &kp LC(BSPC)&kp BSPC    &kp DEL     &kp LC(DEL)
-            &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &caps_word      &kp PG_UP   &left_      &kp UP      &right_     &kp HOME
-            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp PG_DN   &kp LC(LEFT)&kp DOWN    &kp LC(RIGHT)&kp END
+            &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &caps_word      &left_      &kp DOWN    &kp UP      &right_     &kp HOME
+            &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LC(Y)       &kp LC(LEFT)&kp PG_DN   &kp PG_UP   &kp LC(RIGHT)&kp END
                                                 &kp TAB     &kp ENTER       &kp SPACE   &BSPC_DEL
             >;
         };
