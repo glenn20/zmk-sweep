@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.keymap": "cpp",
+        "outputs.h": "c",
+        "memory": "cpp"
+    },
+    "files.autoSave": "afterDelay",
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: LLVM, UseTab: Never, IndentWidth: 4, TabWidth: 4, ColumnLimit: 99 }",
+    "cmake.configureOnOpen": false,
+}

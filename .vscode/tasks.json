@@ -1,0 +1,48 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build zmk firmware",
+            "type": "shell",
+            "command": "${workspaceFolder}/build.sh",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+        {
+            "label": "Build zmk firmware (clean)",
+            "type": "shell",
+            "command": "${workspaceFolder}/build.sh -c",
+            "group": {
+                "kind": "build",
+            },
+        },
+        {
+            "label": "Build and Flash zmk firmware",
+            "type": "shell",
+            "command": "${workspaceFolder}/build.sh -f",
+            "group": {
+                "kind": "build",
+            },
+        },
+        {
+            "label": "Install (reinstall) zmk build environment",
+            "type": "shell",
+            "command": "${workspaceFolder}/build.sh -i",
+            "group": {
+                "kind": "build",
+            },
+        },
+        {
+            "label": "Update zmk build environment",
+            "type": "shell",
+            "command": "${workspaceFolder}/build.sh -u",
+            "group": {
+                "kind": "build",
+            },
+        },
+    ]
+}
