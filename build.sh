@@ -110,7 +110,7 @@ install_zmk_devcontainer() {
     # Build the vscode devcontainer
     log "Building the zmk devcontainer..."
     pushd "$ZMKDIR"
-    devcontainer build || (warn "Install failed."; exit 2)
+    devcontainer build --workspace-folder . || (warn "Install failed."; exit 2)
     popd
 }
 
@@ -129,9 +129,9 @@ run_devcontainer() {
     pushd "$ZMKDIR" || (warn "Error: '$ZMKDIR' directory not found. Run '$0 -i' to install." && exit 1)
     alert "Running build inside the '$ZMKDIR' devcontainer..."
     # Start the devcontainer (id is empty if the container is already running)
-    id=$(devcontainer up | sed -n 's/^.*Start: Run: docker start \([0-9a-f]*\).*$/\1/p')
+    id=$(devcontainer up --workspace-folder . | sed -n 's/^.*Start: Run: docker start \([0-9a-f]*\).*$/\1/p')
     # Run this script again inside the devcontainer
-    devcontainer exec $@
+    devcontainer exec --workspace-folder . $@
     if [ -n "$id" ]; then
         docker stop $id > /dev/null  # Stop the container if we started it
     fi
