@@ -34,13 +34,13 @@
       repeating keys when held.
   - Also use `quick-tap-ms=225` for repeat on fast click then hold
 - To lock the `NUM` layer:
-  - Hold both left thumb keys (`ENTER`+`TAB`) before pressing `NUM` key on the
+  - Hold both left thumb keys (`ENTER`+`TAB`) and press `NUM` key on the
     right thumb :
-    - `SPC` key returns to `BASE` layer
+    - Return to `BASE` layer with `TAB`+`BSPC` combo (both outer thumb keys)
 - To lock the `NAV` layer:
-  - Hold both right thumb keys (`SPACE`+`BSPC`) before pressing `NAV` key on the
-    left thumb :
-    - `ENTER` key returns to `BASE` layer
+  - Hold both right thumb keys (`SPACE`+`BSPC`) and press `NAV` key on the
+    left thumb:
+    - Return to `BASE` layer with `TAB`+`BSPC` combo (both outer thumb keys)
 
 #### BASE layer
 
@@ -55,41 +55,43 @@
 
 - Put all symbol keys on a single layer - with a layout that makes sense to me
   - ``! @ # $ %`` --- `^ & * ( )`
-  - `` ` < ? ' ;`` --- `\ - = [ ]`
-  - ``~ < ! " :`` --- `| _ + { }`
+  - `` ` < ? ' ;`` --- `| - + [ ]`
+  - ``~ < ! " :`` --- `\ _ = { }`
     - `TAB ENTER` - `SPC BSPC`
   - all symbols can be accessed from this one layer without additional modifier
-    - except `.` and `,` which are on BASE layer
+    - except `.`, `,` and `/` - which are on the `BASE` layer
   - symbols from the shifted number keys on a qwerty keyboard along the top row
 
 #### NAV layer
 
 - `NAV` layer key on left and main `NAV` keys on right side:
-  - `WORD BSPC-WORD BSPC  DEL  DEL-WORD`
-  - `PGUP   LEFT     UP  RIGHT  HOME`
-  - `PGDN   LWORD   DOWN RWORD  END`
+  - `WORD   BSPC-WORD   BSPC    DEL    DEL-WORD`
+  - `LEFT     DOWN       UP    RIGHT    HOME`
+  - `LWORD    PGDN      PGUP   RWORD    END`
 - Experimented with a lot of layouts for navigation keys
-  - uses arrow keys in _inverted-T_ on JKL, keys
-- Right hand includes `DEL`, `DEL-WORD` and `BSPC-WORD`
+- Right hand top row includes `DEL`, `DEL-WORD` and `BSPC-WORD`
+- Left hand side:
+  - `ESC` is on `NAV-Q`.
+  - `caps-word` is on `NAV-G`
 
 #### NUM layer
 
 - Num-pad like arrangement on left hand
   - `/ 7 8 9 -` --- `WORD BSPC-WORD BSPC  DEL  DEL-WORD`
-  - `* 4 5 6 +` --- `---- SFT CTL ALT GUI`
-  - `0 1 2 3 .` --- `---- _ , . ESC`
+  - `* 4 5 6 +` --- `----   SFT     CTL   ALT    GUI`
+  - `0 1 2 3 .` --- `SPC     _       ,     .     ESC`
     - `TAB ENTER` - `SPC BSPC`
   - includes `*`, `/`, `+`, `-` keys
 - Right side includes `_` and `,` for typing numbers
-- NUM lock layer using `NAV+SYM+NUM`
+- Lock the `NUM` layer by holding both left thumb keys (`NAV+SYM`) and pressing `NUM`
 
 #### FUN layer (Function keys)
 
 - `F1-F9` function keys on number key locations
 - `F10-F12` on left little finger column.
-  - `f12 f7 f8 f9 PRNT` --- `SLEEP VOL- MUTE VOL+ POWER`
-  - `f11 f4 f5 f6 INSERT` ---- SFT CTL ALT GUI`
-  - `f10 f1 f2 f3 ----` --- `---- --- --- --- ---`
+  - `f12 f7 f8 f9  PRINT` --- `SLEEP  VOL-  MUTE  VOL+  POWER`
+  - `f11 f4 f5 f6 INSERT` --- `----   SFT   CTL   ALT   GUI`
+  - `f10 f1 f2 f3  -----` --- `----   ---   ---   ---   ---`
     - `NAV BASE` - `SPC BSPC`
 - includes media volume and pc power control keys on right side
 
@@ -97,9 +99,9 @@
 
 - includes **bluetooth**, **reset**, **reflash** and **output** control on left
   hand
-  - `USB BLE bt4 --- BTCLR` --- `----- Left-CLK Mid-CLK Right-CLK ----`
-  - `--- --- --- --- RESET` --- `RESET M-LEFT M-UP M-RIGHT SCRL-UP`
-  - `bt0 bt1 bt2 bt3 FLASH` --- `FLASH BACK  M-DOWN FORWD SCRL-DN`
+  - `USB BLE bt4 --- BTCLR` --- `----- Left-CLK Mid-CLK Right-CLK  ESC`
+  - `GUI ALT CTL SFT RESET` --- `RESET  M-LEFT    M-UP    M-RIGHT  SCRL-UP`
+  - `bt0 bt1 bt2 bt3 FLASH` --- `FLASH   BACK    M-DOWN   FORWD    SCRL-DN`
     - `--- ---` - `BASE NUM`
   - Bluetooth profile numbers on corresponding number layer keys
 - Mouse navigation keys on right hand (and **reset**, **reflash**):
