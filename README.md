@@ -56,7 +56,7 @@
 - Put all symbol keys on a single layer - with a layout that makes sense to me
   - ``! @ # $ %`` --- `^ & * ( )`
   - `` ` < ? ' ;`` --- `| - + [ ]`
-  - ``~ < ! " :`` --- `\ _ = { }`
+  - ``~ > ! " :`` --- `\ _ = { }`
     - `TAB ENTER` - `SPC BSPC`
   - all symbols can be accessed from this one layer without additional modifier
     - except `.`, `,` and `/` - which are on the `BASE` layer
